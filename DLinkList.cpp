@@ -18,10 +18,15 @@ bool initList(DLinkList &L) {
     return true;
 }
 
-// 插入
-bool listInsert(DNode *L, DNode * p) {
-
+// 插入： 在 p 节点后插入 s 节点
+bool listInsert(DNode *p, DNode *s) {
+    s->next = p->next;
+    p->next->prior = s;
+    s->prior = p;
+    p->next = s;
 }
+
+
 
 // 判空
 bool isEmpty(DLinkList L) {

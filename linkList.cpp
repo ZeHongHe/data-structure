@@ -2,8 +2,8 @@
 using namespace std;
 
 struct LNode {
-    int data;
-    struct LNode *next;
+    int data;    // 数据域
+    struct LNode *next;  // 后继节点
 };
 
 // 简易写法
