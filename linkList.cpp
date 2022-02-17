@@ -55,10 +55,26 @@ LinkList listHeadInsert(LinkList &L) {
     return L;
 }
 
-// 插入：按指定位序 i 前插
-bool listInsert(LinkList &L, int i, int e) {
-    LNode * p = GetElem(L, i - 1);
-    return nodeNextInsert(p, e);
+// 按值查找
+LNode * locateElem(LinkList &L, int e) {
+    LNode *p = L->next;
+    while (p != NULL && p->data != e)
+        p = p->next;
+    return p;
+}
+
+// 按位查找
+LNode * GetElem(LinkList L, int i) {
+    if (i < 1)
+        return L;
+    LNode *p;     // p 指向当前扫描到的节点
+    int j = 0;    // j 为 p 指向节点的位序
+    p = L;        // 令 p 指向第 0 个节点
+    while (j < i && p != NULL) {    // 循环找到 i 节点
+        p = p->next;
+        j++;
+    }
+    return p;
 }
 
 // 插入：按指定节点 p 后插入
@@ -88,6 +104,13 @@ bool nodePriorInsert(LNode *p, int e) {
     return true;
 }
 
+
+// 插入：按指定位序 i 前插
+bool listInsert(LinkList &L, int i, int e) {
+    LNode * p = GetElem(L, i - 1);
+    return nodeNextInsert(p, e);
+}
+
 // 删除：按指定位序 i
 bool listDelete(LinkList &L, int i, int &e) {
     LNode *p = GetElem(L, i - 1);
@@ -111,28 +134,6 @@ bool nodeDelete(LNode *deleteNode) {
     deleteNode->next = p->next;
     free(deleteNode);
     return true;
-}
-
-// 按值查找
-LNode * locateElem(LinkList &L, int e) {
-    LNode *p = L->next;
-    while (p != NULL && p->data != e)
-        p = p->next;
-    return p;
-}
-
-// 按位查找
-LNode * GetElem(LinkList L, int i) {
-    if (i < 1)
-        return L;
-    LNode *p;     // p 指向当前扫描到的节点
-    int j = 0;    // j 为 p 指向节点的位序
-    p = L;        // 令 p 指向第 0 个节点
-    while (j < i && p != NULL) {    // 循环找到 i 节点
-        p = p->next;
-        j++;
-    }
-    return p;
 }
 
 // 判空
