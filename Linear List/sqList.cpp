@@ -98,6 +98,7 @@ bool isEmpty(sqList &L) {
 
 int main() {
 	sqList L;
+
     initList(L);
 
     for (int i = 1; i <= 10; i++) {
@@ -110,7 +111,7 @@ int main() {
     }
     
     printList(L);
-    
     printf("length is %d.\n", length(L));
-    return 0;
+
+    cin.get();
 }

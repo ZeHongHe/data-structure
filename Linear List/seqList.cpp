@@ -89,6 +89,7 @@ bool isEmpty(seqList &L) {
 
 int main() {
     seqList L;
+
     initList(L);
 
     for (int i = 0; i <= 10; i++) {
@@ -102,7 +103,6 @@ int main() {
     }
 
     printList(L);
-    system("pause");
     
-    return 0;
+    cin.get();
 }

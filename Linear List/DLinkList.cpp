@@ -94,8 +94,9 @@ void printList(DLinkList &L) {
 
 int main() {
     DLinkList L;
+    
     initList(L);
     destroyList(L);
+
     cin.get();
-    return 0;
 }

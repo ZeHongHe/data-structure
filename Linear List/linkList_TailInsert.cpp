@@ -47,9 +47,10 @@ void printList(LinkList &L) {
 
 int main() {
     LinkList L;
+    
     listTailInsert(L);
     printList(L);
 
-    system("pause");
+    cin.get();
     return 0;
 }

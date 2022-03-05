@@ -165,8 +165,9 @@ void printList(LinkList &L) {
 
 int main() {
     LinkList L;
+
     listHeadInsert(L);
     printList(L);
     
-    return 0;
+    cin.get();
 }
