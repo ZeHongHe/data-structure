@@ -96,6 +96,6 @@ int main() {
     DLinkList L;
     initList(L);
     destroyList(L);
-    system("pause");
+    cin.get();
     return 0;
 }
