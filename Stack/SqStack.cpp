@@ -49,7 +49,9 @@ bool isEmpty(Stack S) {
 
 int main() {
     Stack S;
+    
     InitStack(S);
     DestroyStack(S);
+
     cin.get();
 }
