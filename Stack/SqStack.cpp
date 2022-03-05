@@ -1,3 +1,5 @@
+// g++ SqStack.cpp -o SqStack
+
 #include <iostream>
 using namespace std;
 
@@ -26,7 +28,7 @@ bool isEmpty(Stack S);
 
 int main() {
     Stack S;
-    InitStack(S);
-    DestroyStack(S);
+    // InitStack(S);
+    // DestroyStack(S);
     cin.get();
 }
