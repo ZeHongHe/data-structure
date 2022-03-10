@@ -7,12 +7,14 @@ using namespace std;
 struct Stack 
 {
     int data[MaxSize];    // 静态数组存放栈中元素
-    int top;              // 栈顶指针
+    int top;              // 栈顶指针，指向栈顶元素
 };
 
 // 初始化
 void InitStack(Stack &S) {
     S.top = -1;
+    // 若初始化时设置 S.top = 0, 则 top 指向栈内可以插入元素的下一个位置
+    // 此时 Push 和 Pop 操作中，栈操作和指针操作相反
 };
 
 // 销毁
