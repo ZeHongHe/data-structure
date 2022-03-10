@@ -22,7 +22,7 @@ bool DestroyStack(Stack &S) { };
 bool Push(Stack &S, int e) {
     if (S.top == MaxSize - 1)
         return false;
-    S.data[++S.top] = e;
+    S.data[++S.top] = e;    // 指针先加一，后进栈
     return true; 
 };
 
@@ -30,7 +30,7 @@ bool Push(Stack &S, int e) {
 bool Pop(Stack &S, int &e) {
     if (S.top == -1)
         return false;
-    e = S.data[S.top--];
+    e = S.data[S.top--];    // 先出栈，指针后减一
     return true;
 };
 
