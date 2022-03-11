@@ -19,8 +19,10 @@ void Pop(LinkStack &LS, int e) { }
 
 void GetTop(LinkStack LS) { }
 
-bool isEmpty(LinkStack LS) { }
+void isEmpty(LinkStack LS) { }
 
-bool isFull(LinkStack LS) {}
+void isFull(LinkStack LS) { }
 
-int main() { }
+int main() { 
+    cin.get();
+}

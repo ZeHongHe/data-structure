@@ -51,6 +51,5 @@ int main() {
     listTailInsert(L);
     printList(L);
 
-    cin.get();
-    return 0;
+    system("pause");
 }

@@ -48,5 +48,5 @@ int main() {
     listHeadInsert(L);
     printList(L);
     
-    cin.get();
+    system("pause");
 }
