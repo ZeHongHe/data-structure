@@ -98,7 +98,6 @@ bool isEmpty(sqList &L) {
 
 int main() {
 	sqList L;
-
     initList(L);
 
     for (int i = 1; i <= 10; i++) {

@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+
 struct DNode {
     int data;    // 数据域
     struct DNode *prior, *next;    // 前驱和后继

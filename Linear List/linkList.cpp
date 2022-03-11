@@ -104,7 +104,6 @@ bool nodePriorInsert(LNode *p, int e) {
     return true;
 }
 
-
 // 插入：按指定位序 i 前插
 bool listInsert(LinkList &L, int i, int e) {
     LNode * p = GetElem(L, i - 1);
@@ -118,7 +117,7 @@ bool listDelete(LinkList &L, int i, int &e) {
         return false;
     if (p->next == NULL)
         return false;
-    LNode * deleteNode = p->next;
+    LNode *deleteNode = p->next;
     e = deleteNode->data;
     p->next = deleteNode->next;
     free(deleteNode);
