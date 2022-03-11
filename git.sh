@@ -1,6 +1,5 @@
 #!/bin/bash
-msg = $1
 git add .
-git commit -m "${msg}"
+git commit -m "fix"
 git push
 git status
