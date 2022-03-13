@@ -1,5 +1,4 @@
 // g++ LinkStackWithHeadNode.cpp -o LinkStackWithHeadNode
-// 链头 = 栈顶
 
 #include <iostream>
 using namespace std;
@@ -53,7 +52,7 @@ bool Pop(LinkStack &LS, int e) {
 }
 
 void PrintStack(LinkStack LS) {
-    int len = 0;
+    int len = 1;
     LNode *PresentNode = LS->next;
     while (PresentNode->next != NULL) {
         printf("The value of the %d Node in the Stack is %d.\n", len, PresentNode->data);
@@ -74,7 +73,7 @@ bool isEmpty(LinkStack LS) {
 
 int main() {
     LinkStack LS;
-    InitStack LS;
+    InitStack ;LS;
     for (int i = 0; i < 10; i++) {
         Push(LS, i);
     }
