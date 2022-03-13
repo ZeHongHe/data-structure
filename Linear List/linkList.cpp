@@ -152,12 +152,12 @@ int length(LinkList L) {
 }
 
 // 输出
-void printList(LinkList &L) {
-    int len = 0;
-    LNode *p = L;
+void printList(LinkList L) {
+    int len = 1;
+    LNode *p = L->next;
     while(p != NULL) {
         printf("The %d node's data is %d \n", len, p->data);
-        p = p->next;
+        p= p->next;
         len++;
     }
 }
