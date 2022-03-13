@@ -67,17 +67,19 @@ int GetTop(LinkStack LS) {
 }
 
 // 链栈判空
-bool isEmpty(LinkStack LS) {
+bool IsEmpty(LinkStack LS) {
     return (LS->next == NULL);
 }
 
 int main() {
     LinkStack LS;
-    InitStack ;LS;
+
+    InitStack(LS);
     for (int i = 0; i < 10; i++) {
         Push(LS, i);
     }
     PrintStack(LS);
     DestroyStack(LS);
+    
     cin.get();
 }

@@ -16,7 +16,7 @@ typedef struct LNode *LinkList;
 // 初始化：带头节点的单链表
 bool initList(LinkList &L){
     L = (LNode *)malloc(sizeof(LNode));
-    if (L == NULL)     // 内存分配失败则返回 false 
+    if (L == NULL)
         return false;
     L->next = NULL;
     return true;

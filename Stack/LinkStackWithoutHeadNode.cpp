@@ -1,4 +1,4 @@
-// 链头 = 栈顶
+// g++ LinkStackWithoutHeadNode.cpp -o LinkStackWithoutHeadNode
 
 #include <iostream>
 using namespace std;
@@ -11,7 +11,7 @@ struct LNode {
 typedef struct LNode LNode;
 typedef struct LNode *LinkStack;
 
-void initStack(LinkStack &LS) { }
+void InitStack(LinkStack &LS) { }
 
 void DestroyStack(LinkStack &LS) { }
 
@@ -21,12 +21,15 @@ void Push(LinkStack &LS, int e) { }
 // 出栈：与对头节点的后删操作相同
 void Pop(LinkStack &LS, int e) { }
 
+void PrintStack(LinkStack LS) { }
+
 void GetTop(LinkStack LS) { }
 
-void isEmpty(LinkStack LS) { }
+void IsEmpty(LinkStack LS) { }
 
-void isFull(LinkStack LS) { }
+int main() {
+    LinkStack LS;
+    InitStack(LS);
 
-int main() { 
     cin.get();
 }
