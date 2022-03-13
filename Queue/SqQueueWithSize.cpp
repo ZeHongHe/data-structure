@@ -11,6 +11,7 @@ struct SqQueue {
     int size;
 };
 
+// 初始化
 void InitQueue(SqQueue &SQ) {
     SQ.front = SQ.rear = SQ.size = 0;
 }

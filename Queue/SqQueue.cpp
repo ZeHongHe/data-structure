@@ -10,8 +10,8 @@ struct SqQueue {
     int front, rear;    // 队头指针和队尾指针
 };
 
-// 初始化：顺序队列
-void InitQueue(SqQueue SQ) {
+// 初始化
+void InitQueue(SqQueue &SQ) {
     SQ.front = SQ.rear = 0;
 }
 
