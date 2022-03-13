@@ -11,7 +11,10 @@ struct LNode {
 typedef struct LNode LNode;
 typedef struct LNode *LinkStack;
 
-void InitStack(LinkStack &LS) { }
+void InitStack(LinkStack &LS) {
+    LS = (LNode *)malloc(sizeof(LNode));
+    LS = NULL;
+}
 
 void DestroyStack(LinkStack &LS) { }
 
