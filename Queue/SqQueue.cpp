@@ -42,7 +42,7 @@ bool GetHead(SqQueue SQ, int &e) {
 }
 
 // 获取队列元素个数
-int GetNum(SqQueue SQ) {
+int GetLen(SqQueue SQ) {
     return ((SQ.rear + MaxSize - SQ.front) % MaxSize);
 }
 
@@ -63,5 +63,6 @@ int main() {
     SqQueue SQ;
     InitQueue(SQ);
 
+    PrintQueue(SQ);
     cin.get();
 }
