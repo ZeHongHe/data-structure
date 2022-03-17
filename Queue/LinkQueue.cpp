@@ -21,12 +21,15 @@ void InitQueue(LinkQueue &LQ) {
 }
 
 // 入队
-void EnQueue(LinkQueue &LQ, int e) {
+bool EnQueue(LinkQueue &LQ, int e) {
     LinkNode *EnNode = (LinkNode *)malloc(sizeof(LinkNode));
+    if (EnNode == NULL)        // 若内存不足分配失败
+        return false;
     EnNode->data = e;
     EnNode->next = NULL;       // 新节点在队尾，需指向 NULL
     LQ.rear->next = EnNode;    // 令新节点插入到头节点之后 
     LQ.rear = EnNode;          // 令队尾指针指向新节点
+    return true;
 }
 
 // 出队
@@ -36,28 +39,46 @@ bool DeQueue(SqQueue &LQ, int &e) {
     LinkNode *DeNode = LQ.front->next;
     e = DeNode->data;
     LQ.front->next = DeNode->next;
-    if (LQ.rear == DeNode)            // 若此时删除的节点是队列最后一个节点
+    if (LQ.rear == DeNode)            // 若此时出队的节点是队列最后一个节点
         LQ.rear = LQ.front;           // 令队尾指针指向头节点，使队列重新变为空队列
     free(DeNode);
     return true;
 }
 
 // 获取队头元素
-void GetHead(LinkQueue LQ, int &e) { }
+bool GetHead(LinkQueue LQ, int &e) {
+    if (LQ.front == LQ.rear)
+        return false;
+    e = LQ.front->next->data;
+    return true;
+}
 
 // 获取链队列的长度
-void GetLen(LinkQueue LQ) { }
+int GetLen(LinkQueue LQ) {
+    int len;
+    LinkNode *p = LQ.front;
+    while(p->next != NULL) {
+        p = p->next
+        len ++
+    }
+    return len;
+}
 
 // 输出
-void PrintQueue(LinkQueue LQ) { }
+void PrintQueue(LinkQueue LQ) {
+    int len = 1;
+    LinkNode *p = LQ.front;
+    while(p->next != NULL) {
+        printf("The %d node's data is %d \n", len, p->next->data);
+        p= p->next;
+        len++;
+    }
+}
 
 // 判空
 bool IsEmpty(LinkQueue LQ) {
     return (LQ.front == LQ.rear);
 }
-
-// 判满
-void IsFull(LinkQueue LQ) { }
 
 int main() {
     LinkQueue LQ;
