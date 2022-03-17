@@ -9,7 +9,7 @@ typedef struct LinkNode {
 
 // 链队列
 typedef struct LinkQueue {
-    LinkNode *front, *rear;
+    LinkNode *front, *rear;    // 队头指针和队尾指针，都指向链队列中的元素
 } LinkQueue;
 
 // 初始化
@@ -25,8 +25,8 @@ void EnQueue(LinkQueue &LQ, int e) {
     InsertNode->data = e;
     InsertNode->next = NULL;
     if (LQ.front == NULL) {        // 若入队前链队列为空
-        LQ.front = InsertNode;
-        LQ.rear = InsertNode;
+        LQ.front = InsertNode;        // 需要令队头指针指向入队节点
+        LQ.rear = InsertNode;         // 令表尾指针指向新节点
     } else {
         LQ.rear->next = InsertNode;
         LQ.rear = InsertNode;
@@ -34,7 +34,10 @@ void EnQueue(LinkQueue &LQ, int e) {
 }
 
 // 出队
-void GetHead(LinkQueue &LQ, int &e) { }
+bool DeQueue(SqQueue &SQ, int &e) { }
+
+// 获取队头元素
+void GetHead(LinkQueue LQ, int &e) { }
 
 // 获取链队列的长度
 void GetLen(LinkQueue LQ) { }
