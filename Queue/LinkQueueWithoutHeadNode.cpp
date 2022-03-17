@@ -21,15 +21,15 @@ void InitQueue(LinkQueue &LQ) {
 
 // 入队
 void EnQueue(LinkQueue &LQ, int e) {
-    LinkNode *InsertNode = (LinkNode *)malloc(sizeof(LinkNode));
-    InsertNode->data = e;
-    InsertNode->next = NULL;
+    LinkNode *EnNode = (LinkNode *)malloc(sizeof(LinkNode));
+    EnNode->data = e;
+    EnNode->next = NULL;
     if (LQ.front == NULL) {        // 若入队前链队列为空
-        LQ.front = InsertNode;        // 需要令队头指针指向入队节点
-        LQ.rear = InsertNode;         // 令表尾指针指向新节点
+        LQ.front = EnNode;        // 需要令队头指针指向入队节点
+        LQ.rear = EnNode;         // 令表尾指针指向新节点
     } else {
-        LQ.rear->next = InsertNode;
-        LQ.rear = InsertNode;
+        LQ.rear->next = EnNode;
+        LQ.rear = EnNode;
     }
 }
 

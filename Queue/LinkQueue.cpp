@@ -22,18 +22,24 @@ void InitQueue(LinkQueue &LQ) {
 
 // 入队
 void EnQueue(LinkQueue &LQ, int e) {
-    LinkNode *InsertNode = (LinkNode *)malloc(sizeof(LinkNode));
-    InsertNode->data = e;
-    InsertNode->next = NULL;       // 新节点在队尾，需指向 NULL
-    LQ.rear->next = InsertNode;    // 令新节点插入到头节点之后 
-    LQ.rear = InsertNode;          // 令队尾指针指向新节点
+    LinkNode *EnNode = (LinkNode *)malloc(sizeof(LinkNode));
+    EnNode->data = e;
+    EnNode->next = NULL;       // 新节点在队尾，需指向 NULL
+    LQ.rear->next = EnNode;    // 令新节点插入到头节点之后 
+    LQ.rear = EnNode;          // 令队尾指针指向新节点
 }
 
 // 出队
 bool DeQueue(SqQueue &LQ, int &e) {
     if (LQ.front == LQ.rear) 
         return false;
-    e = LQ.
+    LinkNode *DeNode = LQ.front->next;
+    e = DeNode->data;
+    LQ.front->next = DeNode->next;
+    if (LQ.rear == DeNode)            // 若此时删除的节点是队列最后一个节点
+        LQ.rear = LQ.front;           // 令队尾指针指向头节点，使队列重新变为空队列
+    free(DeNode);
+    return true;
 }
 
 // 获取队头元素
