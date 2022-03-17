@@ -30,14 +30,14 @@ void EnQueue(LinkQueue &LQ, int e) {
 }
 
 // 出队
-bool DeQueue(SqQueue &SQ, int &e) { }
-
-// 获取队头元素
-void GetHead(LinkQueue LQ, int &e) {
+bool DeQueue(SqQueue &LQ, int &e) {
     if (LQ.front == LQ.rear) 
         return false;
-    
+    e = LQ.
 }
+
+// 获取队头元素
+void GetHead(LinkQueue LQ, int &e) { }
 
 // 获取链队列的长度
 void GetLen(LinkQueue LQ) { }

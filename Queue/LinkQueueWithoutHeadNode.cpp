@@ -34,7 +34,7 @@ void EnQueue(LinkQueue &LQ, int e) {
 }
 
 // 出队
-bool DeQueue(SqQueue &SQ, int &e) { }
+bool DeQueue(SqQueue &LQ, int &e) { }
 
 // 获取队头元素
 void GetHead(LinkQueue LQ, int &e) { }
