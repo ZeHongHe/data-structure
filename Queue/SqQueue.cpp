@@ -50,10 +50,11 @@ int GetLen(SqQueue SQ) {
 bool PrintQueue(SqQueue SQ) {
     int PresentFront = SQ.front;
     int PresentRear = SQ.rear;
-    if (PresentFront == PresentRear) 
+    if (PresentFront == PresentRear) {
         printf("Sequence Queue is empty!\n");
         return false;
-    while (PresentFront == PresentRear) {
+    }
+    while (PresentFront != PresentRear) {
         printf("%d\n", SQ.data[PresentFront]);
         PresentFront = (PresentFront + 1) % MaxSize;
     }

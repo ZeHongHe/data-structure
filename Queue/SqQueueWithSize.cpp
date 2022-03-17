@@ -55,9 +55,10 @@ bool PrintQueue(SqQueue SQ) {
     int PresentFront = SQ.front;
     int PresentRear = SQ.rear;
     int PresentSize = SQ.size;
-    if (PresentSize == 0) 
+    if (PresentSize == 0) {
         printf("Sequence Queue is empty!\n");
         return false;
+    }
     while (PresentFront != PresentRear) {
         printf("%d\n", SQ.data[PresentFront]);
         PresentFront = (PresentFront + 1) % MaxSize;
@@ -86,6 +87,6 @@ int main() {
     }
 
     PrintQueue(SQ);
-    
+
     cin.get();
 }
