@@ -14,10 +14,9 @@ typedef struct LinkQueue {
 
 // 初始化
 void InitQueue(LinkQueue &LQ) {
-    // 申请头节点的内存空间，并让链队列的队头队尾指针指向头节点
-    LQ.front = LQ.rear = (LinkNode *)malloc(sizeof(LinkNode));
-    // 让头节点的 next 指向 NULL
-    LQ.front->next = NULL;
+    // 不带头节点的情况下，需要让链队列的队头队尾指针指向 NULL
+    LQ.front = NULL;
+    LQ.rear = NULL;
 }
 
 // 入队
@@ -34,7 +33,7 @@ void PrintQueue(LinkQueue LQ) { }
 
 // 判空
 bool IsEmpty(LinkQueue LQ) {
-    return (LQ.front == LQ.rear);
+    return (LQ.front == NULL);
 }
 
 // 判满
