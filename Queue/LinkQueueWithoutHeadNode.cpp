@@ -20,7 +20,18 @@ void InitQueue(LinkQueue &LQ) {
 }
 
 // 入队
-void EnQueue(LinkQueue &LQ, int e) { }
+void EnQueue(LinkQueue &LQ, int e) {
+    LinkNode *InsertNode = (LinkNode *)malloc(sizeof(LinkNode));
+    InsertNode->data = e;
+    InsertNode->next = NULL;
+    if (LQ.front == NULL) {        // 若入队前链队列为空
+        LQ.front = InsertNode;
+        LQ.rear = InsertNode;
+    } else {
+        LQ.rear->next = InsertNode;
+        LQ.rear = InsertNode;
+    }
+}
 
 // 出队
 void GetHead(LinkQueue &LQ, int &e) { }

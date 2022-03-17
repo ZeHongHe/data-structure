@@ -21,7 +21,13 @@ void InitQueue(LinkQueue &LQ) {
 }
 
 // 入队
-void EnQueue(LinkQueue &LQ, int e) { }
+void EnQueue(LinkQueue &LQ, int e) {
+    LinkNode *InsertNode = (LinkNode *)malloc(sizeof(LinkNode));
+    InsertNode->data = e;
+    InsertNode->next = NULL;       // 新节点在队列尾部，需指向 NULL
+    LQ.rear->next = InsertNode;    // 令新节点插入到头节点之后 
+    LQ.rear = InsertNode;          // 令表尾指针指向新节点
+}
 
 // 出队
 void GetHead(LinkQueue &LQ, int &e) { }
