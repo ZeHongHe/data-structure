@@ -29,7 +29,7 @@ bool DeQueue(SqQueue &SQ, int &e) {
     if (SQ.front == SQ.rear)    // 队列判空的条件
         return false;
     e = SQ.data[SQ.front];
-    SQ.front = (SQ.rear + 1) % MaxSize;
+    SQ.front = (SQ.front + 1) % MaxSize;
     return true;
 }
 
@@ -41,13 +41,24 @@ bool GetHead(SqQueue SQ, int &e) {
     return true;
 }
 
-// 获取队列元素个数
+// 获取队列长度
 int GetLen(SqQueue SQ) {
     return ((SQ.rear + MaxSize - SQ.front) % MaxSize);
 }
 
 // 输出
-void PrintQueue(SqQueue SQ) { }
+bool PrintQueue(SqQueue SQ) {
+    int PresentFront = SQ.front;
+    int PresentRear = SQ.rear;
+    if (PresentFront == PresentRear) 
+        printf("Sequence Queue is empty!\n");
+        return false;
+    while (PresentFront == PresentRear) {
+        printf("%d\n", SQ.data[PresentFront]);
+        PresentFront = (PresentFront + 1) % MaxSize;
+    }
+    return true;
+}
 
 // 判空
 bool IsEmpty(SqQueue SQ) {
@@ -61,8 +72,13 @@ bool IsFull(SqQueue SQ) {
 
 int main() {
     SqQueue SQ;
+
     InitQueue(SQ);
+    for (int i = 0; i < 10; i++) {
+        EnQueue(SQ, i);
+    }
 
     PrintQueue(SQ);
+
     cin.get();
 }
