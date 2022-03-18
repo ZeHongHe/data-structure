@@ -16,7 +16,7 @@ void InitStack(SqStack &S) {
 
 // 入栈
 bool Push(SqStack &S, char e) {
-    if (S.top = MaxSize - 1)
+    if (S.top == MaxSize - 1)
         return false;
     S.data[++S.top] = e;
     return true;
@@ -24,7 +24,7 @@ bool Push(SqStack &S, char e) {
 
 // 出栈
 bool Pop(SqStack &S, char &e) {
-    if (S.top = -1)
+    if (S.top == -1)
         return false;
     e = S.data[S.top--];
     return true;
@@ -59,14 +59,11 @@ bool BracketCheck(char str[], int len) {
 }
 
 int main() {
-
-    char ValidStr[10] = "{[()]}";
-
-    if (BracketCheck(ValidStr, 10)) {
+    char ValidStr[3] = "()";
+    if (BracketCheck(ValidStr, 2)) {
         printf("Brackets are Valid!");
     } else {
         printf("Brackets are not Valid!");
     }
-
     cin.get();
 }
