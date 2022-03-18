@@ -27,6 +27,7 @@ bool Pop(SqStack &S, char &e) {
     if (S.top = -1)
         return false;
     e = S.data[S.top--];
+    return true;
 }
 
 // 判空
@@ -60,7 +61,7 @@ bool BracketCheck(char str[], int len) {
 int main() {
 
     char ValidStr[10] = "{[()]}";
-    
+
     if (BracketCheck(ValidStr, 10)) {
         printf("Brackets are Valid!");
     } else {
