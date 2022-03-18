@@ -41,7 +41,7 @@ bool Push(LinkStack &LS, int e) {
 }
 
 // 出栈：与对头节点的后删操作相同
-bool Pop(LinkStack &LS, int e) {
+bool Pop(LinkStack &LS, int &e) {
     if (LS->next == NULL)
         return false;
     LNode *PopNode = LS->next;
