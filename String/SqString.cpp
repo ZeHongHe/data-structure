@@ -73,7 +73,10 @@ int index(SqString S, SqString T) {
 }
 
 // 清空
-void ClearString(SqString &S) { }
+void ClearString(SqString &S) {
+    for (int i = 1; i <= S.len; i++)
+        S.ch[i] = '\0'
+}
 
 // 销毁
 void DestroyString(SqString &S) { }
