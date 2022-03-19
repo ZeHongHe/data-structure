@@ -11,7 +11,7 @@ typedef struct LNode {
 
 // 初始化
 bool InitStack(LinkStack &LS) {
-    LS = (LNode *)malloc(sizeof(LNode))
+    LS = (LNode *)malloc(sizeof(LNode));
     if (LS == NULL)
         return false;
     LS->next = NULL;
@@ -30,7 +30,7 @@ bool Push(LinkStack &LS, char e) {
 }
 
 // 出栈
-void Pop(LinkStack &LS, char &e) {
+bool Pop(LinkStack &LS, char &e) {
     if (LS->next == NULL)
         return false;
     LNode *PopNode = LS->next;
