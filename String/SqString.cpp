@@ -23,8 +23,14 @@ bool StrAssign(SqString &AS, SqString S) {
     return true;
 }
 
-// 比较
-void StrCompare(SqString S, SqString T) { }
+// 比较： 若 S > T, 返回值 > 0; 若 S = T, 则返回值 = 0;若 S < T, 则返回值 < 0
+void StrCompare(SqString S, SqString T) {
+    for (int i = 1; i <= S.len && i <= T.len; i++) {
+        if (S.ch[i] != T.ch[i])
+            return (S.ch[i] - T.ch[i]);
+    }
+    return (S.len - T.len);
+}
 
 // 复制
 void StrCopy(SqString &CS, SqString S) { }
