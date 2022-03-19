@@ -24,11 +24,12 @@ bool StrAssign(SqString &AS, SqString S) {
 }
 
 // 比较： 若 S > T, 返回值 > 0; 若 S = T, 则返回值 = 0;若 S < T, 则返回值 < 0
-void StrCompare(SqString S, SqString T) {
+bool StrCompare(SqString S, SqString T) {
     for (int i = 1; i <= S.len && i <= T.len; i++) {
         if (S.ch[i] != T.ch[i])
             return (S.ch[i] - T.ch[i]);
     }
+    // 若扫描过的所有字符串都相同，则返回两字符串的长度差
     return (S.len - T.len);
 }
 
@@ -60,7 +61,16 @@ bool SubString(SqString &Sub, SqString S, int pos, int len) {
 void Concat(SqString &S, SqString ConcatS1, SqString ConcatS2) { }
 
 // 定位
-void index(SqString S, SqString Sub) { }
+int index(SqString S, SqString T) {
+    int i = 1;
+    SqString Sub;    // 用于暂存子串
+    while( i <= S.len - T.len + 1) {
+        SubString(Sub, S, i, T.len);
+        if   (StrCompare(Sub, T) != 0) ++i;
+        else return i;    // 返回子串在主串中的位置
+    }
+    return 0;    // S 中不存在与 T相同的字串
+}
 
 // 清空
 void ClearString(SqString &S) { }
