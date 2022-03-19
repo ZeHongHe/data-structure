@@ -2,7 +2,7 @@
 using namespace std;
 
 typedef struct StringNode {
-    char ch;
+    char ch[8];
     struct LNode *next;
 } StringNode, *String;
 
