@@ -1,21 +1,3 @@
-/* 
- * 顺序表 L 的操作：(静态分配)
- *
- * 1. initList(&L): 初始化表。
- * 2. destroyLise(&L): 销毁操作。
- * 
- * 3. listInsert(&L, i, e): 插入操作。
- * 4. listDelete(&L, i, &e): 删除操作。
- * 
- * 5. locateElem(L, e): 按值查找操作。
- * 6. getElem(L, i): 按位查找操作。
- * 
- * 7. length(L): 返回顺序表 L 的长度。
- * 8. printList(L): 输出 L 的所有元素值。
- * 9. isEmpty(L): 判断 L 是否为空。
- * 
- */
-
 #include <iostream>
 #include <cstdlib>
 #define maxSize 10    // 定义最大长度
