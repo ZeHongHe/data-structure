@@ -59,8 +59,8 @@ bool BracketCheck(char str[], int len) {
 }
 
 int main() {
-    char ValidStr[3] = "()";
-    if (BracketCheck(ValidStr, 2)) {
+    char ValidStr[5] = "({})";
+    if (BracketCheck(ValidStr, 4)) {
         printf("Brackets are Valid!");
     } else {
         printf("Brackets are not Valid!");

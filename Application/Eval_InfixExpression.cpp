@@ -3,23 +3,51 @@
 #include <iostream>
 using namespace std;
 
+// 链栈
 typedef struct LNode {
     char data;
     struct LNode *next;
 } LNode, *LinkStack;
 
-void InitStack(LinkStack &LS) { }
+// 初始化
+bool InitStack(LinkStack &LS) {
+    LS = (LNode *)malloc(sizeof(LNode))
+    if (LS == NULL)
+        return false;
+    LS->next = NULL;
+    return true;
+}
 
-void Push(LinkStack &LS, char e) { }
+// 入栈
+bool Push(LinkStack &LS, char e) {
+    LNode *PushNode = (LNode *)malloc(sizeof(LNode));
+    if (PushNode == NULL) 
+        return false;
+    PushNode->data = e;
+    PushNode->next = LS->next;
+    LS->next = PushNode;
+    return true;
+}
 
-void Pop(LinkStack &LS, char &e) { }
+// 出栈
+void Pop(LinkStack &LS, char &e) {
+    if (LS->next == NULL)
+        return false;
+    LNode *PopNode = LS->next;
+    e = PopNode->data;
+    LS->next = PopNode->next;
+    free(PopNode);
+    return true;
+}
 
+// 中缀表达式转后缀表达式
 void InFix2PostFix(char str[]) { }
 
+// 后缀表达式求值
 void EvalPostFix(char str[]) { }
 
+
 int main() {
-    char InFix[11] = "3+6*(4-2)/3";
-    cout << EvalPostFix(InFix2PostFix(InFix)) << endl;
+
     cin.get();
 }
