@@ -135,6 +135,23 @@ bool nodeDelete(LNode *deleteNode) {
     return true;
 }
 
+// 删除：按指定值删除
+bool valueDelete(LinkList &L, int val) {
+    bool IsDelete = false;
+    LNode *cur = L;
+    while (cur->next != NULL) {
+        if (cur->next->data == val) {
+            LNode *temp = L->next;
+            cur->next = temp->next;
+            free(temp);
+            IsDelete = true;
+        } else {
+            cur = cur->next;
+        }
+    }
+    return IsDelete;
+}
+
 // 判空
 bool isEmpty(LinkList L) {
     return (L->next == NULL);
