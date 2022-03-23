@@ -73,7 +73,7 @@ int Index(SqString S, SqString T) {
 }
 
 // 朴素模式匹配 (主串 S， 模式串 T)
-int IndexNormal(SqString S, SqString T) {
+int Index_Normal(SqString S, SqString T) {
     int k = 1;        // 待匹配的字串在主串中的数组下标
     int i = k;        // 主串的数组下标
     int j = 1;        // 模式串的数组下标
@@ -90,6 +90,23 @@ int IndexNormal(SqString S, SqString T) {
     if (j > T.len)    // 若是因为主串长度不足而退出 while 循环的话， j < T.len
         return k;
     else 
+        return 0;
+}
+
+// KMP 模式匹配
+int Index_KMP(SqString S, SqString T, int next[]) {
+    int i = 1, j = 1;
+    while(i <= S.len && j <= T.len) {
+        if (j == 0 || S.ch[i] == T.ch[j]) {
+            ++i;
+            ++j;
+        } else {
+            j = next[j];
+        }
+    }
+    if (j > T.len)
+        return i - T.len;
+    else
         return 0;
 }
 
