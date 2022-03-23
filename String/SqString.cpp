@@ -74,9 +74,9 @@ int Index(SqString S, SqString T) {
 
 // 朴素模式匹配 (主串 S， 模式串 T)
 int IndexNormal(SqString S, SqString T) {
-    int k = 1;
-    int i = k;        // 主串的匹配下标
-    int j = 1;        // 模式串的匹配下标
+    int k = 1;        // 待匹配的字串在主串中的数组下标
+    int i = k;        // 主串的数组下标
+    int j = 1;        // 模式串的数组下标
     while(i <= S.len && j <= T.len) {
         if (S.ch[i] == T.ch[j]) {
             ++i;
