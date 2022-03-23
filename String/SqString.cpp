@@ -52,7 +52,7 @@ bool SubString(SqString &Sub, SqString S, int pos, int len) {
     if ((pos + len - 1) > S.len)
         return false;
     for (int i = pos; i < pos + len; i++)
-        Sub[i - pos + 1] = S.ch[i];
+        Sub.ch[i - pos + 1] = S.ch[i];
     Sub.len = len;
     return true;
 }
@@ -61,7 +61,7 @@ bool SubString(SqString &Sub, SqString S, int pos, int len) {
 void Concat(SqString &S, SqString ConcatS1, SqString ConcatS2) { }
 
 // 定位
-int index(SqString S, SqString T) {
+int Index(SqString S, SqString T) {
     int i = 1;
     SqString Sub;    // 用于暂存子串
     while( i <= S.len - T.len + 1) {
@@ -72,10 +72,31 @@ int index(SqString S, SqString T) {
     return 0;    // S 中不存在与 T相同的字串
 }
 
+// 朴素模式匹配 (主串 S， 模式串 T)
+int IndexNormal(SqString S, SqString T) {
+    int k = 1;
+    int i = k;        // 主串的匹配下标
+    int j = 1;        // 模式串的匹配下标
+    while(i <= S.len && j <= T.len) {
+        if (S.ch[i] == T.ch[j]) {
+            ++i;
+            ++j;      // 继续比较后继字符
+        } else {
+            k++;
+            i = k;
+            j = 1;
+        }
+    }
+    if (j > T.len)    // 若是因为主串长度不足而退出 while 循环的话， j < T.len
+        return k;
+    else 
+        return 0;
+}
+
 // 清空
 void ClearString(SqString &S) {
     for (int i = 1; i <= S.len; i++)
-        S.ch[i] = '\0'
+        S.ch[i] = '\0';
 }
 
 // 销毁

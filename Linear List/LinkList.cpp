@@ -170,13 +170,12 @@ int length(LinkList L) {
 
 // 输出
 void printList(LinkList L) {
-    int len = 1;
-    LNode *p = L->next;
-    while(p != NULL) {
-        printf("The %d node's data is %d \n", len, p->data);
-        p= p->next;
-        len++;
-    }
+    LNode* cur = L;
+        while (cur->next != NULL) {
+            cout << cur->next->data << " ";
+            cur = cur->next;
+        }
+    cout << endl;
 }
 
 int main() {
