@@ -93,19 +93,36 @@ int Index_Normal(SqString S, SqString T) {
         return 0;
 }
 
-// KMP 模式匹配
-int Index_KMP(SqString S, SqString T, int next[]) {
-    int i = 1, j = 1;
-    while(i <= S.len && j <= T.len) {
-        if (j == 0 || S.ch[i] == T.ch[j]) {
+// 求模式串 T 的 next 数组
+void GetNext(SqString T, int next[]) {
+    int i = 1, j = 0;
+    next[1] = 0;
+    while(i < T.len) {
+        if (j == 0 || T.ch[i] == T.ch[j]) {
             ++i;
             ++j;
+            next[i] = j;
         } else {
             j = next[j];
         }
     }
+}
+
+// KMP 模式匹配
+int Index_KMP(SqString S, SqString T) {
+    int i = 1, j = 1;
+    int next[T.len + 1];
+    GetNext(T, next);
+    while(i <= S.len && j <= T.len) {
+        if (j == 0 || S.ch[i] == T.ch[j]) {
+            ++i;
+            ++j;                  // 继续比较后继字符
+        } else {
+            j = next[j];          // 模式串向右移
+        }
+    }
     if (j > T.len)
-        return i - T.len;
+        return i - T.len;         // 匹配成功
     else
         return 0;
 }
