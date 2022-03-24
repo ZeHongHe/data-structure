@@ -108,23 +108,41 @@ void GetNext(SqString T, int next[]) {
     }
 }
 
-// KMP 模式匹配
-int Index_KMP(SqString S, SqString T) {
-    int i = 1, j = 1;
+// 求模式串 T 的 nextval 数组
+void GetNextval(SqString T, int nextval[]) {
     int next[T.len + 1];
     GetNext(T, next);
+    nextval[1] = 0;
+    for (int j = 2; j <= T.len; j++) {
+        if (T.ch[next[j]] == T.ch[j])
+            nextval[j] = nextval[next[j]];
+        else 
+            nextval[j] = next[j];
+    }
+}
+
+// KMP 模式匹配: 时间复杂度 O(m + n)
+int Index_KMP(SqString S, SqString T) {
+    int i = 1, j = 1;
+
+    int next[T.len + 1];
+    GetNext(T, next);
+
+    // int nextval[T.len + 1];
+    // GetNextval(T, nextval);
+
     while(i <= S.len && j <= T.len) {
         if (j == 0 || S.ch[i] == T.ch[j]) {
-            ++i;
+            ++i;                  // 主串的 i 指针不回溯
             ++j;                  // 继续比较后继字符
         } else {
-            j = next[j];          // 模式串向右移
+            j = next[j];          // 模式串的 j 指针按 next 返回，相当于模式串相对于主串向右移
         }
     }
     if (j > T.len)
         return i - T.len;         // 匹配成功
     else
-        return 0;
+        return 0;                 // 匹配失败
 }
 
 // 清空
@@ -138,8 +156,6 @@ void DestroyString(SqString &S) { }
 
 
 int main() {
-    SqString S;
-    InitString(S);
 
     cin.get();
 }
