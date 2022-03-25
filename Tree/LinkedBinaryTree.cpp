@@ -22,13 +22,17 @@ void CreateBiTree(BiTree *T){
 
     (*T)->right->data=3;
     (*T)->right->left=(BiTNode*)malloc(sizeof(BiTNode));
+
     (*T)->right->left->data=6;
     (*T)->right->left->left=NULL;
     (*T)->right->left->right=NULL;
+
     (*T)->right->right=(BiTNode*)malloc(sizeof(BiTNode));
+    
     (*T)->right->right->data=7;
     (*T)->right->right->left=NULL;
     (*T)->right->right->right=NULL;
+
     (*T)->left->left->data=4;
     (*T)->left->left->left=NULL;
     (*T)->left->left->right=NULL;
