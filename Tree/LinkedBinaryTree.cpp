@@ -6,36 +6,36 @@ typedef struct BiTNode {
     struct BiTNode *left, *right;
 } BiTNode, *BiTree;
 
-void CreateBiTree(BiTree *T){
-    *T=(BiTNode*)malloc(sizeof(BiTNode));
-    (*T)->data=1;
-    (*T)->left=(BiTNode*)malloc(sizeof(BiTNode));
-    (*T)->right=(BiTNode*)malloc(sizeof(BiTNode));
+void CreateBiTree(BiTree T){
+    T=(BiTNode*)malloc(sizeof(BiTNode));
+    T->data=1;
+    T->left=(BiTNode*)malloc(sizeof(BiTNode));
+    T->right=(BiTNode*)malloc(sizeof(BiTNode));
   
-    (*T)->left->data=2;
-    (*T)->left->left=(BiTNode*)malloc(sizeof(BiTNode));
-    (*T)->left->right=(BiTNode*)malloc(sizeof(BiTNode));
+    T->left->data=2;
+    T->left->left=(BiTNode*)malloc(sizeof(BiTNode));
+    T->left->right=(BiTNode*)malloc(sizeof(BiTNode));
 
-    (*T)->left->right->data=5;
-    (*T)->left->right->left=NULL;
-    (*T)->left->right->right=NULL;
+    T->left->right->data=5;
+    T->left->right->left=NULL;
+    T->left->right->right=NULL;
 
-    (*T)->right->data=3;
-    (*T)->right->left=(BiTNode*)malloc(sizeof(BiTNode));
+    T->right->data=3;
+    T->right->left=(BiTNode*)malloc(sizeof(BiTNode));
 
-    (*T)->right->left->data=6;
-    (*T)->right->left->left=NULL;
-    (*T)->right->left->right=NULL;
+    T->right->left->data=6;
+    T->right->left->left=NULL;
+    T->right->left->right=NULL;
 
-    (*T)->right->right=(BiTNode*)malloc(sizeof(BiTNode));
-    
-    (*T)->right->right->data=7;
-    (*T)->right->right->left=NULL;
-    (*T)->right->right->right=NULL;
+    T->right->right=(BiTNode*)malloc(sizeof(BiTNode));
 
-    (*T)->left->left->data=4;
-    (*T)->left->left->left=NULL;
-    (*T)->left->left->right=NULL;
+    T->right->right->data=7;
+    T->right->right->left=NULL;
+    T->right->right->right=NULL;
+
+    T->left->left->data=4;
+    T->left->left->left=NULL;
+    T->left->left->right=NULL;
 }
 // 初始化
 void InitTree(BiTree &BiT) {
@@ -59,33 +59,33 @@ void InsertNode(BiTNode *BiT, int e) {
         return;
 }
 
-void PrintNode(BiTNode *BiT){
-    printf("%d ", (*BiT).data);
+void PrintNode(BiTNode BiT){
+    printf("%d ", BiT->data);
 }
 
 // 先序遍历
-void PreOrder(BiTNode *BiT) {
+void PreOrder(BiTNode BiT) {
     if (BiT != NULL) {
         PrintNode(BiT);
-        PreOrder((*BiT).left);
-        PreOrder((*BiT).right);
+        PreOrder(BiT->left);
+        PreOrder(BiT->right);
     }
 }
 
 // 中序遍历
-void InOrder(BiTNode *BiT) {
+void InOrder(BiTNode BiT) {
     if (BiT != NULL) {
-        InOrder((*BiT).left);
+        InOrder(BiT->left);
         PrintNode(BiT);
-        InOrder((*BiT).right);
+        InOrder(BiT->right);
     }
 }
 
 // 后序遍历
 void PostOrder(BiTNode *BiT) {
     if (BiT != NULL) {
-        PostOrder((*BiT).left);
-        PostOrder((*BiT).right);
+        PostOrder(BiT->left);
+        PostOrder(BiT->right);
         PrintNode(BiT);
     }
 }
