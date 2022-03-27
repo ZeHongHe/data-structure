@@ -1,19 +1,10 @@
 #include <iostream>
 #define ElemType int
 using namespace std;
-/* TreeNode, the basic data structure of the tree
- * include:
- *  left: left child pointer
- *  right: right child pointer
- */
-typedef struct TreeNode {
-    ElemType data;
-    struct TreeNode *left;  
-    struct TreeNode *right;
-} TreeNode, *Tree;
 
 /* ThreadedNode, the special data structure of the tree
  * includes:
+ *  data: stores the data
  *  left: left child pointer
  *  right: right child pointer
  *  lTag: a flag identifies whether the pointer points to its left child or its precursor
@@ -49,6 +40,18 @@ void InitTree(ThreadedTree &T) {
     T->rTag = 0;
 }
 
+void InsertNode(ThreadedNode *T, ElemType e) {
+    ThreadedNode *newNode = CreateNode(e);
+    if (T->left == NULL) 
+        T->left = newNode;
+    else if (T->right == NULL)
+        T->right = newNode;
+    else return;
+}
+
+void visitNode(ThreadedNode *T) {
+    printf("%d\n", T->data);
+}
 
 
 int main() {

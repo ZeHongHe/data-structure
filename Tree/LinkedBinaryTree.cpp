@@ -1,22 +1,27 @@
 #include <iostream>
 using namespace std;
 
-typedef struct BiTNode {
+/* TreeNode, the basic data structure of the tree
+ * include:
+ *  left: left child pointer
+ *  right: right child pointer
+ */
+typedef struct TreeNode {
     int data;
-    struct BiTNode *left, *right;
-} BiTNode, *BiTree;
+    struct TreeNode *left, *right;
+} TreeNode, *Tree;
 
 // 初始化
-void InitTree(BiTree &BiT) {
-    BiT = (BiTNode *)malloc(sizeof(BiTNode));
+void InitTree(Tree &BiT) {
+    BiT = (TreeNode *)malloc(sizeof(TreeNode));
     (*BiT).data = 0;
     (*BiT).left = NULL;
     (*BiT).right = NULL;
 }
 
 // 插入节点
-void InsertNode(BiTNode *BiT, int e) {
-    BiTNode * pNode = (BiTNode *)malloc(sizeof(BiTNode));
+void InsertNode(TreeNode *BiT, int e) {
+    TreeNode * pNode = (TreeNode *)malloc(sizeof(TreeNode));
     pNode->data = e;
     pNode->left = NULL;
     pNode->right = NULL;
@@ -28,12 +33,12 @@ void InsertNode(BiTNode *BiT, int e) {
         return;
 }
 
-void PrintNode(BiTNode BiT){
+void PrintNode(TreeNode BiT){
     printf("%d ", BiT->data);
 }
 
 // 先序遍历
-void PreOrder(BiTNode BiT) {
+void PreOrder(TreeNode BiT) {
     if (BiT != NULL) {
         PrintNode(BiT);
         PreOrder(BiT->left);
@@ -42,7 +47,7 @@ void PreOrder(BiTNode BiT) {
 }
 
 // 中序遍历
-void InOrder(BiTNode BiT) {
+void InOrder(TreeNode BiT) {
     if (BiT != NULL) {
         InOrder(BiT->left);
         PrintNode(BiT);
@@ -51,7 +56,7 @@ void InOrder(BiTNode BiT) {
 }
 
 // 后序遍历
-void PostOrder(BiTNode *BiT) {
+void PostOrder(TreeNode *BiT) {
     if (BiT != NULL) {
         PostOrder(BiT->left);
         PostOrder(BiT->right);
@@ -60,7 +65,7 @@ void PostOrder(BiTNode *BiT) {
 }
 
 int main() {
-    BiTree root;
+    Tree root;
 
     PreOrder(root);
     cout << endl;
