@@ -24,24 +24,36 @@ typedef struct TreeNode {
  */
 typedef struct ThreadedNode {
     ElemType data;
-    struct TreeNode *left;     
-    struct TreeNode *right;    
+    struct ThreadedNode *left;     
+    struct ThreadedNode *right;    
     int lTag;                  
     int rTag;                  
 } ThreadedNode, *ThreadedTree;
 
 // creates a new node and return its pointer
-TreeNode *CreateNode(ElemType data) {
-    TreeNode *ptr = (TreeNode *)malloc(sizeof(TreeNode));
+ThreadedNode *CreateNode(ElemType data) {
+    ThreadedNode *ptr = (ThreadedNode *)malloc(sizeof(ThreadedNode));
     ptr->data = data;
     ptr->left = NULL;
     ptr->right = NULL;
     return ptr;
 }
 
+// inits a threaded tree
+void InitTree(ThreadedTree &T) {
+    T = (ThreadedNode *)malloc(sizeof(ThreadedNode));
+    T->data = 0;
+    T->left = NULL;
+    T->right = NULL;
+    T->lTag = 0;
+    T->rTag = 0;
+}
+
+
 
 int main() {
-    Tree root;
+    ThreadedTree root;
+    InitTree(root);
 
     cin.get();
 }
