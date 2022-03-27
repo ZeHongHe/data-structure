@@ -19,8 +19,8 @@ typedef struct TreeNode {
  *  lTag: a flag identifies whether the pointer points to its left child or its precursor
  *  rTag: a flag identifies whether the pointer points to its right child or its successor
  * notes:
- *  while lTag = 0, left points to left child, and ltag = 1, left points to precursor
- *  while rTag = 0, right points to right child, and rtag = 1, right points to successor
+ *  while lTag = 0, left points to its left child, and ltag = 1, left points to its precursor
+ *  while rTag = 0, right points to its right child, and rtag = 1, right points to itssuccessor
  */
 typedef struct ThreadedNode {
     ElemType data;
