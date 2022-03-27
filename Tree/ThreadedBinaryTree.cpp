@@ -21,9 +21,6 @@ typedef struct ThreadNode {
     int rTag;                  
 } ThreadNode, *ThreadTree;
 
-// pre is used for chasing somenode's precursor
-ThreadNode *pre = NULL;
-
 // creates a new node and return its pointer
 ThreadNode *CreateNode(ElemType data) {
     ThreadNode *ptr = (ThreadNode *)malloc(sizeof(ThreadNode));
@@ -53,15 +50,32 @@ void InsertNode(ThreadNode *T, ElemType e) {
     else return;
 }
 
-void CreateInThread(ThreadNode) {
-
+// Traverse T in middle order and convert it
+void InThread(ThreadTree T, ThreadNode *pre) {
+    if (T != NULL) {
+        InThread(T->left, pre);
+        if (T->left == NULL) {    // if T node has not left child, change its left ptr pointes to pre node; 
+            T->left = pre;
+            T->lTag = 1;
+        }
+        if (pre != NULL && pre->right == NULL) {    // if pre node has not right child, change its right ptr pointes to T node; 
+            pre->right = T;
+            pre->rTag = 1;
+        }
+        pre = T;
+        InThread(T->right, pre);
+    }
 }
 
-// 
-void visitNode(ThreadNode *T) {
-    printf("%d\n", T->data);
+// converts T into a thread tree
+void CreateInThread(ThreadTree T) {
+    ThreadNode *pre = NULL;
+    if (T != NULL) {
+        InThread(T, pre);
+        pre->right == NULL;
+        pre->rTag = 1;
+    }
 }
-
 
 int main() {
     ThreadTree root;
