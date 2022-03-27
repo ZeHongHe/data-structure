@@ -50,11 +50,12 @@ void InsertNode(ThreadNode *T, ElemType e) {
     else return;
 }
 
-// Traverse T in middle order and convert it
-void InThread(ThreadTree T, ThreadNode *pre) {
-    if (T != NULL) {
-        InThread(T->left, pre);
-        if (T->left == NULL) {    // if T node has not left child, change its left ptr pointes to pre node; 
+// pre ptr points to node's precursor
+ThreadNode *pre = NULL;
+
+// add precursor pointer and successor pointer for T node
+void Visit(ThreadNode *T) {        
+    if (T->left == NULL) {    // if T node has not left child, change its left ptr pointes to pre node; 
             T->left = pre;
             T->lTag = 1;
         }
@@ -63,17 +64,62 @@ void InThread(ThreadTree T, ThreadNode *pre) {
             pre->rTag = 1;
         }
         pre = T;
+}
+
+// Traverse T in middle order and convert it
+void InThread(ThreadTree T, ThreadNode *pre) {
+    if (T != NULL) {
+        InThread(T->left, pre);
+        Visit(T);
         InThread(T->right, pre);
     }
 }
 
 // converts T into a thread tree
 void CreateInThread(ThreadTree T) {
-    ThreadNode *pre = NULL;
     if (T != NULL) {
         InThread(T, pre);
         pre->right == NULL;
         pre->rTag = 1;
+    }
+}
+
+// Traverse T in pre order and convert it
+void PreThread(ThreadTree T, ThreadNode *pre) {
+    if (T != NULL) {
+        Visit(T);
+        if (T->lTag == 0)
+            PreThread(T, pre);
+        PreThread(T, pre);
+    }
+}
+
+// converts T into a thread tree
+void CreatePreThread(ThreadTree T) {
+    ThreadNode *pre = NULL;
+    if (T != NULL) {
+        PreThread(T, pre);
+        pre->right = NULL;
+        pre->rTag = 1;
+    }
+}
+
+// Traverse T in post order and convert it
+void PostThread(ThreadTree T, ThreadNode *pre) {
+    if (T != NULL) {
+        PostThread(T, pre);
+        PostThread(T, pre);
+        Visit(T);
+    }
+}
+
+// converts T into a thread tree
+void CreatePostThread(ThreadTree T) {
+    ThreadNode *pre = NULL;
+    if (T != NULL) {
+        PostThread(T, pre);
+        if (pre->right = NULL)
+            pre->rTag = 1;
     }
 }
 
