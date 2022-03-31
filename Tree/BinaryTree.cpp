@@ -1,4 +1,5 @@
 #include <iostream>
+#define ElemType int
 using namespace std;
 
 /* TreeNode, the basic data structure of the tree
@@ -19,48 +20,74 @@ void InitTree(Tree T) {
     T->right = NULL;
 }
 
-// 插入节点
-void InsertNode(TreeNode *T, int e) {
-    TreeNode * pNode = (TreeNode *)malloc(sizeof(TreeNode));
-    pNode->data = e;
-    pNode->left = NULL;
-    pNode->right = NULL;
-    if ((*T).left == NULL)
-        (*T).left = pNode;
-    else if ((*T).right == NULL)
-        (*T).right = pNode;
-    else 
-        return;
+// 创造并返回一个树节点
+TreeNode *CreateNode(ElemType data) {
+    TreeNode *ptr = (TreeNode *)malloc(sizeof(TreeNode));
+    ptr->data = data;
+    ptr->left = NULL;
+    ptr->right = NULL;
+    return ptr;
 }
 
-void PrintNode(TreeNode *T){ }
+// 插入节点
+bool InsertNode(TreeNode *T, ElemType e) {
+    TreeNode *newNode = CreateNode(e);
+    if (T->left == NULL)
+    {
+        T->left = newNode;
+        return true;
+    }
+    else if (T->right == NULL)
+    {
+        T->right = newNode;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void Visit(TreeNode *T) { }
+
+// 中序遍历
+void InOrder(Tree T) {
+    if (T != NULL) {
+        InOrder(T->left);
+        Visit(T);
+        InOrder(T->right);
+    }
+}
+
+// 中序遍历：非递归版
+void InOrderNonRecursion(Tree T) { }
 
 // 先序遍历
-void PreOrder(TreeNode *T) {
+void PreOrder(Tree T) {
     if (T != NULL) {
-        PrintNode(T);
+        Visit(T);
         PreOrder(T->left);
         PreOrder(T->right);
     }
 }
 
-// 中序遍历
-void InOrder(TreeNode *T) {
-    if (T != NULL) {
-        InOrder(T->left);
-        PrintNode(T);
-        InOrder(T->right);
-    }
-}
+// 先序遍历：非递归版
+void PreOrderNonRecursion(Tree T) { }
 
 // 后序遍历
-void PostOrder(TreeNode *T) {
+void PostOrder(Tree T) {
     if (T != NULL) {
         PostOrder(T->left);
         PostOrder(T->right);
-        PrintNode(T);
+        Visit(T);
     }
 }
+
+// 后序遍历：非递归版
+void PostOrderNonRecursion(Tree T) { }
+
+// 层序遍历
+void LevelOrder(Tree T) { }
 
 int main() {
     Tree root;

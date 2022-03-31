@@ -87,7 +87,7 @@ void CreateInThread(ThreadTree T) {
     ThreadNode *pre = NULL;
     if (T != NULL) {
         InThread(T, pre);
-        pre->right == NULL;
+        pre->right = NULL;
         pre->rTag = 1;
     }
 }
@@ -126,7 +126,7 @@ void CreatePostThread(ThreadTree T) {
     ThreadNode *pre = NULL;
     if (T != NULL) {
         PostThread(T, pre);
-        if (pre->right = NULL)
+        if (pre->right == NULL)
             pre->rTag = 1;
     }
 }
