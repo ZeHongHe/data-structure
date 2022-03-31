@@ -131,6 +131,25 @@ void CreatePostThread(ThreadTree T) {
     }
 }
 
+// 找到以 p 为根的子树中，第一个被中序遍历的节点
+ThreadNode *FirstNode(ThreadNode *p) {
+    while (p->lTag == 0)
+        p = p->left;
+    return p;
+}
+
+// 在中序线索二叉树中找到 p 的后继节点
+ThreadNode *NextNode(ThreadNode *p) {
+    if (p->rTag == 0) return FirstNode(p->right);
+    else return p->right;
+}
+
+// 线索二叉树的中序遍历的非递归实现
+void InOrderNonRecursion(ThreadTree T) {
+    for(ThreadNode* p = FirstNode(p); p != NULL; p = NextNode(p))
+        Visit(p);
+}
+
 int main() {
     ThreadTree root;
     InitTree(root);

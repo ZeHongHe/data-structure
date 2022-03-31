@@ -59,7 +59,7 @@ void InOrder(Tree T) {
     }
 }
 
-// 中序遍历：非递归版
+// 非递归实现中序遍历
 void InOrderNonRecursion(Tree T) { }
 
 // 先序遍历
@@ -71,7 +71,7 @@ void PreOrder(Tree T) {
     }
 }
 
-// 先序遍历：非递归版
+// 非递归实现先序遍历
 void PreOrderNonRecursion(Tree T) { }
 
 // 后序遍历
@@ -83,7 +83,7 @@ void PostOrder(Tree T) {
     }
 }
 
-// 后序遍历：非递归版
+// 非递归实现后序遍历
 void PostOrderNonRecursion(Tree T) { }
 
 // 层序遍历
