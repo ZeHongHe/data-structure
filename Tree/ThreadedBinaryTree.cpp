@@ -15,10 +15,8 @@ using namespace std;
  */
 typedef struct ThreadNode {
     ElemType data;
-    struct ThreadNode *left;     
-    struct ThreadNode *right;    
-    int lTag;                  
-    int rTag;                  
+    struct ThreadNode *left, *right;
+    int lTag, rTag;
 } ThreadNode, *ThreadTree;
 
 // creates a new node and return its pointer
@@ -41,29 +39,38 @@ void InitTree(ThreadTree T) {
 }
 
 // inserts node after T 
-void InsertNode(ThreadNode *T, ElemType e) {
+bool InsertNode(ThreadNode *T, ElemType e) {
     ThreadNode *newNode = CreateNode(e);
-    if (T->left == NULL) 
+    if (T->left == NULL)
+    {
         T->left = newNode;
+        return true;
+    } 
     else if (T->right == NULL)
+    {
         T->right = newNode;
-    else return;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 // pre ptr points to node's precursor
 ThreadNode *pre = NULL;
 
-// add precursor pointer and successor pointer for T node
-void Visit(ThreadNode *T) {        
+// add precursor and successor pointer for T node
+void Visit(ThreadNode *T) {
     if (T->left == NULL) {    // if T node has not left child, change its left ptr pointes to pre node; 
             T->left = pre;
             T->lTag = 1;
-        }
-        if (pre != NULL && pre->right == NULL) {    // if pre node has not right child, change its right ptr pointes to T node; 
-            pre->right = T;
-            pre->rTag = 1;
-        }
-        pre = T;
+    }
+    if (pre != NULL && pre->right == NULL) {    // if pre node(Previous T node) has not right child, change its right ptr pointes to T node; 
+        pre->right = T;
+        pre->rTag = 1;
+    }
+    pre = T;
 }
 
 // Traverse T in middle order and convert it
@@ -77,6 +84,7 @@ void InThread(ThreadTree T, ThreadNode *pre) {
 
 // converts T into a thread tree
 void CreateInThread(ThreadTree T) {
+    ThreadNode *pre = NULL;
     if (T != NULL) {
         InThread(T, pre);
         pre->right == NULL;
@@ -89,8 +97,8 @@ void PreThread(ThreadTree T, ThreadNode *pre) {
     if (T != NULL) {
         Visit(T);
         if (T->lTag == 0)
-            PreThread(T, pre);
-        PreThread(T, pre);
+            PreThread(T->left, pre);
+        PreThread(T->right, pre);
     }
 }
 
@@ -107,8 +115,8 @@ void CreatePreThread(ThreadTree T) {
 // Traverse T in post order and convert it
 void PostThread(ThreadTree T, ThreadNode *pre) {
     if (T != NULL) {
-        PostThread(T, pre);
-        PostThread(T, pre);
+        PostThread(T->left, pre);
+        PostThread(T->right, pre);
         Visit(T);
     }
 }
