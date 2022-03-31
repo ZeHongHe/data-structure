@@ -132,22 +132,77 @@ void CreatePostThread(ThreadTree T) {
 }
 
 // 找到以 p 为根的子树中，第一个被中序遍历的节点
-ThreadNode *FirstNode(ThreadNode *p) {
+ThreadNode *FirstNodeInOrder(ThreadNode *p) {
     while (p->lTag == 0)
         p = p->left;
     return p;
 }
 
-// 在中序线索二叉树中找到 p 的后继节点
-ThreadNode *NextNode(ThreadNode *p) {
+// 找到以 p 为根的子树中，最后一个被中序遍历的节点
+ThreadNode *LastNodeInOrder(ThreadNode *p) {
+    while (p->rTag == 0)
+        p = p->right;
+    return p;
+}
+
+// 找到 p 的中序后继节点
+ThreadNode *NextNodeInOrder(ThreadNode *p) {
     if (p->rTag == 0) return FirstNode(p->right);
     else return p->right;
 }
 
+// 找到 p 的中序前驱节点
+ThreadNode *PreNodeInOrder(ThreadNode *p) { 
+    if (p->lTag == 0) return LastNode(p->left);
+    else return p->left;
+}
+
 // 线索二叉树的中序遍历的非递归实现
 void InOrderNonRecursion(ThreadTree T) {
-    for(ThreadNode* p = FirstNode(p); p != NULL; p = NextNode(p))
+    for(ThreadNode* p = FirstNode(T); p != NULL; p = NextNode(p))
         Visit(p);
+}
+
+// 线索二叉树的逆中序遍历的非递归实现
+void InReverseOrderNonRecursion(ThreadTree T) {
+    for(ThreadNode* p = LastNode(T); p != NULL; p = PreNode(p))
+        Visit(p);
+}
+
+// 找到以 p 为根的子树中，第一个被先序遍历的节点
+ThreadNode *FirstNodePreOrder(ThreadNode *p) {
+    return p;    // 原地 TP
+}
+
+// 找到以 p 为根的子树中，最后一个被先序遍历的节点
+ThreadNode *FirstNodePreOrder(ThreadNode *p) {
+    if (p->left == NULL && p->right == NULL) return p;
+    // 未完成
+}
+
+// 找到 p 的先序后继节点
+ThreadNode *NextNodePreOrder(ThreadNode *p) {
+    if (p->rTag == 1 || p->lTag == 1) return p->right;
+    else return p->left;
+}
+
+// 找到 p 的先序前驱节点
+ThreadNode *PreNodePreOrder(ThreadNode *p) {
+    if (p->lTag == 1) return p->left;
+    else return p;   // 若 lTag == 0，则无法找到 p 的先序前驱节点，除非是改用三叉链表找到父节点或从根节点开始遍历
+}
+
+// 找到 p 的后序后继节点
+ThreadNode *NextNodePostOrder(ThreadNode *p) {
+    if (p->rTag == 1) return p->right;
+    else return p;   // 若 rTag == 0，则无法找到 p 的后序后续节点，除非是改用三叉链表找到父节点或从根节点开始遍历
+}
+
+// 找到 p 的后序前驱节点
+ThreadNode *PreNodePostOrder(ThreadNode *p) {
+    if (p->lTag == 1) return p->lTag;
+    else if (p->rTag == 0 && p->right != NULL) return p->right;
+    else return p->left;
 }
 
 int main() {
