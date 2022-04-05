@@ -6,5 +6,5 @@
 
 
 
-[B站王道视频课](https://www.bilibili.com/video/BV1b7411N798?p=25)
+[B站王道视频课](https://www.bilibili.com/video/BV1b7411N798)
 
