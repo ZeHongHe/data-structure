@@ -156,17 +156,17 @@ avlNode *insert(avlNode *node, int key)
     return node;
 }
 
-avlNode *delete(avlNode *node, int queryNum)
+avlNode *deleteNode(avlNode *node, int queryNum)
 {
     if (node == NULL)
         return node;
 
     if (queryNum < node->key)
         node->left =
-            delete (node->left, queryNum); /*Recursive deletion in L subtree*/
+            deleteNode (node->left, queryNum); /*Recursive deletion in L subtree*/
     else if (queryNum > node->key)
         node->right =
-            delete (node->right, queryNum); /*Recursive deletion in R subtree*/
+            deleteNode (node->right, queryNum); /*Recursive deletion in R subtree*/
     else
     {
         /*Single or No Child*/
@@ -193,8 +193,8 @@ avlNode *delete(avlNode *node, int queryNum)
             avlNode *temp = minNode(node->right);
             node->key = temp->key; /*Copy that to the root*/
             node->right =
-                delete (node->right,
-                        temp->key); /*Delete the smallest in the R subtree.*/
+                deleteNode (node->right,
+                        temp->key); /*DeleteNode the smallest in the R subtree.*/
         }
     }
 
@@ -286,7 +286,7 @@ int main()
         printf("\n\nEnter the Step to Run : \n");
 
         printf("\t1: Insert a node into AVL tree\n");
-        printf("\t2: Delete a node in AVL tree\n");
+        printf("\t2: DeleteNode a node in AVL tree\n");
         printf("\t3: Search a node into AVL tree\n");
         printf("\t4: printPreOrder (Ro L R) Tree\n");
         printf("\t5: printInOrder (L Ro R) Tree\n");
@@ -331,7 +331,7 @@ int main()
 
         case 2:
         {
-            printf("\n\tEnter the Number to Delete: ");
+            printf("\n\tEnter the Number to DeleteNode: ");
             scanf("%d", &queryNum);
 
             tempNode = findNode(root, queryNum);
@@ -343,7 +343,7 @@ int main()
                 printf("\n\tPrinting AVL Tree\n");
                 printAVL(root, 1);
                 printf("\n");
-                root = delete (root, queryNum);
+                root = deleteNode (root, queryNum);
 
                 printf("\n\tPrinting AVL Tree\n");
                 printAVL(root, 1);
