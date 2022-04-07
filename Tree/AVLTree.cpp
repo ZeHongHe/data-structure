@@ -10,13 +10,14 @@ struct AVLNode
 };
 
 typedef struct AVLNode avlNode;
+typedef struct AVLNode *avlTree;
 
 avlNode *create_node(int key)
 {
     avlNode *node = (avlNode *)malloc(sizeof(avlNode));
 
     if (node == NULL)
-        printf("Out of memory!")
+        printf("Out of memory!");
     else 
     {
         node->key = key;
@@ -48,6 +49,17 @@ int height_diff(avlNode *node)
     else
         return (node_height(node->left) - node_height(node->right));
     
+}
+
+/* find the min key in the sequence traversal */
+avlNode *in_order_min(avlNode *node)
+{
+    if (node != NULL)
+    {
+        while(node->left != NULL)
+            in_order_min(node->left);
+    }
+    return node;
 }
 
 /* LL & RR balance rotation:
@@ -130,16 +142,16 @@ avlNode *right_left_rotate(avlNode *z)
 
 /*
  * Steps to follow for insertion:
- * 1) Perform standard BST insert for w.
+ * 1) Perform standard BST insert for w. (w is the newly inserted node.)
  * 2) Starting from w, travel up and find the first unbalanced node.
  * 3) Re-balance the tree by performing appropriate rotations on the subtree rooted with z.
  */
 avlNode *insert_node(avlNode *node, int key)
 {
+    /* 1) standard BST insert */
     if (node == NULL)
         return create_node(key);
 
-    /* 1) standard BST insert */
     if (key == node->key)
         return node;
 
@@ -150,11 +162,168 @@ avlNode *insert_node(avlNode *node, int key)
         node->right = insert_node(node->right, key);
     
 
+    /* 2) find the first unbalanced node */
+    node->height = max(node_height(node->left), node_height(node->right)) + 1;
+
+    avlNode *unbalanced_node = node;
+
+    while ( 
+            (height_diff(unbalanced_node) < -1 
+            || height_diff(unbalanced_node) > 1)
+            && 
+            (height_diff(unbalanced_node->left) < -1
+            || height_diff(unbalanced_node->left) > 1
+            || height_diff(unbalanced_node->right) < -1
+            || height_diff(unbalanced_node->right) > 1)
+        )
+    {
+        if (unbalanced_node > 0)
+            unbalanced_node = unbalanced_node->left;
+        else if (unbalanced_node < 0)
+            unbalanced_node = unbalanced_node->right;
+        else 
+            break;
+    }
+
+
+    /* 3) Re-balance the tree by rotations */
+    int unbalance_number = height_diff(unbalanced_node);
+
+    /* LL Rotation */
+    if (unbalance_number > 1 && key < (unbalanced_node->left->key))
+        unbalanced_node =  right_rotate(unbalanced_node);
+    
+    /* RR Rotation */
+    if (unbalance_number < 1 && key > (unbalanced_node->left->key))
+        unbalanced_node =  left_rotate(unbalanced_node);
+    
+    /* LR Rotation */
+    if (unbalance_number > 1 && key > (unbalanced_node->left->key))
+        unbalanced_node =  left_right_rotate(unbalanced_node);
+
+    /* RL Rotation */
+    if (unbalance_number < 1 && key < (unbalanced_node->left->key))
+        unbalanced_node =  right_left_rotate(unbalanced_node);
+
+    return unbalanced_node;
+}
+
+
+/*
+ * Steps to follow for delete:
+ * 1) Perform standard BST delete for w. (w is the node to be deleted.)
+ * 2) Starting from w, travel up and find the first unbalanced node.
+ * 3) Re-balance the tree by performing appropriate rotations on the subtree rooted with z.
+ */
+avlNode *delete_node(avlNode *node, int querykey)
+{
+    /* 1) standard BST delete */
+    if (node == NULL)
+        return node;
+    
+    if (querykey < node->key)
+        node = delete_node(node->left, querykey);
+
+    else if (querykey > node->key)
+        node = delete_node(node->right, querykey);
+    
+    else 
+    {
+        /* no child or single child */
+        if ((node->left == NULL) || (node->right == NULL))
+        {
+            avlNode *temp = node->left ? node->left : node->right;
+
+            if (temp == NULL) {
+                temp = node;
+                node = NULL;
+            }
+            else
+            {
+                *node = *temp;
+            }
+
+            free(temp);
+        }
+        /* two child */
+        else
+        {
+            avlNode *temp = in_order_min(node->right);
+
+            node->key = temp->key;
+            *temp = *(temp->right);
+
+            free(temp->right);
+        }
+    }
+
+    /*single node in tree*/
+    if (node == NULL)
+        return node;
+
+
+    /* 2) Starting from w, travel up and find the first unbalanced node */
+    node->height = max(node_height(node->left), node_height(node->right)) + 1;
+
+    avlNode *unbalanced_node = node;
+
+    while ( 
+            (height_diff(unbalanced_node) < -1 
+            || height_diff(unbalanced_node) > 1)
+            && 
+            (height_diff(unbalanced_node->left) < -1
+            || height_diff(unbalanced_node->left) > 1
+            || height_diff(unbalanced_node->right) < -1
+            || height_diff(unbalanced_node->right) > 1)
+        )
+    {
+        if (unbalanced_node > 0)
+            unbalanced_node = unbalanced_node->left;
+        else if (unbalanced_node < 0)
+            unbalanced_node = unbalanced_node->right;
+        else 
+            break;
+    }
+
+
+    /* 3) Re-balance the tree by rotations */
+    int unbalance_number = height_diff(unbalanced_node);
+
+    /* LL Rotation */
+    if (unbalance_number > 1 && querykey < (unbalanced_node->left->key))
+        unbalanced_node =  right_rotate(unbalanced_node);
+    
+    /* RR Rotation */
+    if (unbalance_number < 1 && querykey > (unbalanced_node->left->key))
+        unbalanced_node =  left_rotate(unbalanced_node);
+    
+    /* LR Rotation */
+    if (unbalance_number > 1 && querykey > (unbalanced_node->left->key))
+        unbalanced_node =  left_right_rotate(unbalanced_node);
+
+    /* RL Rotation */
+    if (unbalance_number < 1 && querykey < (unbalanced_node->left->key))
+        unbalanced_node =  right_left_rotate(unbalanced_node);
+
+    return unbalanced_node;
+}
+
+avlNode *find_node(avlNode *node, int querykey)
+{
+    if (node != NULL)
+    {
+        if (querykey < node->key)
+            node = find_node(node->left, querykey);
+        else if (querykey > node->key)
+            node = find_node(node->right, querykey);
+    }
+
+    return node;
 }
 
 int main()
 {
-    AVLTree T;
+    avlTree T;
 
     cin.get();
 }
