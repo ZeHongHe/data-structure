@@ -36,3 +36,5 @@
 
 # shell scripts
 *.sh
+
+avl_tree.c
