@@ -84,10 +84,10 @@ bool InsertKeyWithRecursion(BSTree T, ElemType key)
         return false;
 
     else if (key < T->data)
-        return InsertKey(T->left, key);
+        return InsertKeyWithRecursion(T->left, key);
 
     else if (key > T->data)
-        return InsertKey(T->right, key);
+        return InsertKeyWithRecursion(T->right, key);
 }
 
 // 构造二叉排序树
