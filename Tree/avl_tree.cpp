@@ -323,7 +323,5 @@ avlNode *find_node(avlNode *node, int querykey)
 
 int main()
 {
-    avlTree T;
-
     cin.get();
 }
