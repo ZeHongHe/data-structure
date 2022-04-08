@@ -3,9 +3,11 @@
 
 #include "queue.h"
 #include <iostream>
+
 #define MaxVertexNum 100
 #define VextexType char
 #define EdgeType int
+
 using namespace std;
 
 struct Graph 

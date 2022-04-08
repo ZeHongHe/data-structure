@@ -1,4 +1,4 @@
-// g++ SqQueueWithSize.cpp -o SqQueueWithSize
+/* queue implementation with array and size */
 
 #include <iostream>
 #define MaxSize 10

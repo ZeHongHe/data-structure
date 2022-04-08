@@ -49,3 +49,8 @@ void de_queue(queue Q, int &e)
 
     free(delete_node);
 }
+
+int main()
+{
+    cin.get();
+}
