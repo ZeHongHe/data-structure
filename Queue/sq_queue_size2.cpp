@@ -9,6 +9,7 @@ struct Queue
     int *data;
     int head;
     int tail;
+    int size;
 };
 
 typedef struct Queue queue;
@@ -19,29 +20,33 @@ void init_queue(queue &Q)
 
     if (Q.data == NULL) printf("Out of space!");
 
-    Q.head = Q.tail = 0; 
+    Q.head = Q.tail = Q.size = 0;
 }
 
-bool is_full(queue Q) { return ((Q.tail + 1) % MAXSIZE == Q.head); }
+bool is_empty(queue Q) { return (Q.size == 0); }
 
-bool is_empty(queue Q) { return (Q.head == Q.tail); }
+bool is_full(queue Q) { return (Q.size == MAXSIZE); }
 
-int size(queue Q) { return ((Q.tail + MAXSIZE - Q.head) % MAXSIZE); }
+int size(queue Q) { return Q.size; }
 
 void en_queue(queue &Q, int e)
-{   
-    if ((Q.tail + 1) % MAXSIZE == Q.head) printf("Queue is full!");
+{
+    if (Q.size == MAXSIZE) printf("Queue is full!");
 
     Q.data[Q.tail] = e;
-    Q.tail = (Q.head + 1) % MAXSIZE;
+    Q.tail = (Q.tail + 1) % MAXSIZE;
+
+    Q.size++;
 }
 
 void de_queue(queue &Q, int &e)
 {
-    if (Q.head == Q.tail) printf("Queue is empty!");
+    if (Q.size == 0) printf("Queue is empty!");
 
     e = Q.data[Q.head];
     Q.head = (Q.head + 1) % MAXSIZE;
+
+    Q.size--;
 }
 
 int main()
