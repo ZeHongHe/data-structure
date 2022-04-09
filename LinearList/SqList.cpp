@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstdlib>
 #define maxSize 10    // 定义最大长度
 
 using namespace std;
@@ -78,21 +77,7 @@ bool isEmpty(sqList &L) {
     }
 }
 
-int main() {
-	sqList L;
-    initList(L);
-
-    for (int i = 1; i <= 10; i++) {
-		listInsert(L, i - 1, i - 1);
-    }
-    
-    int deleteNumber;
-    for (int i = 1; i <= 10; i++) {
-		listDelete(L, i - 1, deleteNumber);
-    }
-    
-    printList(L);
-    printf("length is %d.\n", length(L));
-
+int main()
+{
     cin.get();
 }
