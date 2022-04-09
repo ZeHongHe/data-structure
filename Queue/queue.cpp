@@ -25,7 +25,7 @@ void init_queue(queue Q)
     Q->tail = NULL;
 }
 
-bool is_empty(queue Q) { return (Q->head == NULL);}
+bool isEmpty(queue Q) { return (Q->head == NULL);}
 
 void en_queue(queue Q, int e)
 {
@@ -34,7 +34,7 @@ void en_queue(queue Q, int e)
     new_node->data = e;
     new_node->next = NULL;
 
-    if (Q->head == NULL)
+    if (isEmpty(Q))
     {
         Q->head = new_node;
         Q->tail = new_node;
@@ -48,7 +48,7 @@ void en_queue(queue Q, int e)
 
 void de_queue(queue Q, int &e)
 {
-    if (Q->head == NULL) printf("Queue is empty!");
+    if (isEmpty(Q)) printf("Queue is empty!");
 
     node *delete_node = Q->head;
     e = delete_node->data;

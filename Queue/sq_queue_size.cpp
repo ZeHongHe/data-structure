@@ -23,15 +23,15 @@ void init_queue(queue &Q)
     Q.head = Q.tail = Q.size = 0;
 }
 
-bool is_empty(queue Q) { return (Q.size == 0); }
+bool isEmpty(queue Q) { return (Q.size == 0); }
 
-bool is_full(queue Q) { return (Q.size == MAXSIZE); }
+bool isFull(queue Q) { return (Q.size == MAXSIZE); }
 
 int size(queue Q) { return Q.size; }
 
 void en_queue(queue &Q, int e)
 {
-    if (Q.size == MAXSIZE) printf("Queue is full!");
+    if (isFull(Q)) printf("Queue is full!");
 
     Q.data[Q.tail] = e;
     Q.tail = (Q.tail + 1) % MAXSIZE;
@@ -41,7 +41,7 @@ void en_queue(queue &Q, int e)
 
 void de_queue(queue &Q, int &e)
 {
-    if (Q.size == 0) printf("Queue is empty!");
+    if (isEmpty(Q)) printf("Queue is empty!");
 
     e = Q.data[Q.head];
     Q.head = (Q.head + 1) % MAXSIZE;

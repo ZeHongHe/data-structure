@@ -1,4 +1,4 @@
-/* circular queuequeue implementation using array */
+/* circular queue implementation using array */
 
 #include <iostream>
 #define MAXSIZE 10
@@ -22,15 +22,15 @@ void init_queue(queue &Q)
     Q.head = Q.tail = 0; 
 }
 
-bool is_full(queue Q) { return ((Q.tail + 1) % MAXSIZE == Q.head); }
+bool isFull(queue Q) { return ((Q.tail + 1) % MAXSIZE == Q.head); }
 
-bool is_empty(queue Q) { return (Q.head == Q.tail); }
+bool isEmpty(queue Q) { return (Q.head == Q.tail); }
 
 int size(queue Q) { return ((Q.tail + MAXSIZE - Q.head) % MAXSIZE); }
 
 void en_queue(queue &Q, int e)
 {   
-    if ((Q.tail + 1) % MAXSIZE == Q.head) printf("Queue is full!");
+    if (isFull(Q)) printf("Queue is full!");
 
     Q.data[Q.tail] = e;
     Q.tail = (Q.head + 1) % MAXSIZE;
@@ -38,7 +38,7 @@ void en_queue(queue &Q, int e)
 
 void de_queue(queue &Q, int &e)
 {
-    if (Q.head == Q.tail) printf("Queue is empty!");
+    if (isEmpty(Q)) printf("Queue is empty!");
 
     e = Q.data[Q.head];
     Q.head = (Q.head + 1) % MAXSIZE;

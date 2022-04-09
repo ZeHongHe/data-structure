@@ -2,9 +2,11 @@
 // Adjacency Matrix Representation
 
 #include <iostream>
+
 #define MaxVertexNum 100
 #define VextexType char
 #define EdgeType int
+
 using namespace std;
 
 struct Graph 
@@ -14,7 +16,7 @@ struct Graph
     int vexNum, edgeNum;
 };
 
-typedef struct Graph Graph;
+typedef struct Graph graph;
 
 int main()
 {
