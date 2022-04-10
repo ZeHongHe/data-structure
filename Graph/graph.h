@@ -1,11 +1,6 @@
-// Graph
-// Adjacency Matrix Representation
-
-#include <iostream>
-#include "graph.h"
+// Graph interface
+#include <stdbool.h>
 #define Vertex int
-
-using namespace std;
 
 struct GraphRep
 {
@@ -14,6 +9,7 @@ struct GraphRep
     int nE;
 };
 
+// only directed graph 
 struct Edge
 {
     Vertex v;
@@ -41,7 +37,5 @@ void delete_edge(graph, edge);
 int first_neighbor(graph, Vertex);
 int next_neighbor(graph, Vertex, Vertex);
 
-int main()
-{
-    cin.get();
-}
+
+
