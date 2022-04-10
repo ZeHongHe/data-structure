@@ -1,5 +1,6 @@
 #include "queue.h"
 #include <iostream>
+#include <cassert>
 using namespace std;
 
 struct node 
@@ -27,7 +28,7 @@ void en_queue(queue Q, int e)
 {
     node *new_node = (node *)malloc(sizeof(node));
 
-    if (new_node == NULL) printf("Out of space!");
+    assert(new_node == NULL);
 
     new_node->data = e;
     new_node->next = NULL;
