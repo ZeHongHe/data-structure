@@ -1,20 +1,10 @@
 // Graph interface
-#include <stdbool.h>
+#include <cstdbool>
 #define Vertex int
 
-struct GraphRep
-{
-    int **edges;
-    int nV;
-    int nE;
-};
+struct GraphRep;
 
-// only directed graph 
-struct Edge
-{
-    Vertex v;
-    Vertex w;
-};
+struct Edge;
 
 typedef struct GraphRep GraphRep;
 typedef struct GraphRep *graph;
@@ -23,10 +13,10 @@ typedef struct Edge edge;
 
 void init_graph(graph);
 
-bool valid_vertex(graph, Vertex)
+bool valid_vertex(graph, Vertex);
 bool Adjacent(graph, edge);
 
-void Neighbors(graph, Vertex);
+int *Neighbors(graph, Vertex);
 
 void insert_vertex(graph, Vertex);
 void delete_vertex(graph, Vertex);
