@@ -6,15 +6,18 @@ struct GraphRep;
 
 struct Edge;
 
+struct Node;
+
 typedef struct GraphRep GraphRep;
 typedef struct GraphRep *graph;
 
 typedef struct Edge edge;
+typedef struct Node node;
 
-void init_graph(graph);
+void init_graph(graph, Vertex);
 
 bool valid_vertex(graph, Vertex);
-bool Adjacent(graph, edge);
+bool Adjacent(graph, Vertex, Vertex);
 
 int *Neighbors(graph, Vertex);
 

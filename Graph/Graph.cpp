@@ -24,9 +24,8 @@ struct Edge
 };
 
 void init_graph(graph G, int V)
-{   
-    // the equal sign for empty graph
-    assert(V >= 0);
+{
+    assert(V > 0);
 
     G = (GraphRep *)malloc(sizeof(GraphRep));
     assert(G != NULL);
@@ -50,7 +49,7 @@ void init_graph(graph G, int V)
     }
 }
 
-bool valid_vertex(graph G, Vertex v) { return (G != NULL && v > 0 && v < G->nV); }
+bool valid_vertex(graph G, Vertex v) { return (G != NULL && v > 0 && G->is_vertex_exist[v] == true;); }
 
 bool Adjacent(graph G, Vertex v, Vertex w)
 {
