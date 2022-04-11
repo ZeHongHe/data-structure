@@ -56,12 +56,50 @@ bool valid_vertex(graph G, Vertex v)
 bool Adjacent(graph G, Vertex v, Vertex w)
 {
     assert(G != NULL && valid_vertex(G, v) && valid_vertex(G, w));
-    return true;
+    
+    for (edge *now_vertex = G->nodes[v].first; now_vertex != NULL; now_vertex = now_vertex->next)
+    {
+        if (now_vertex->w == w) return true;
+    }
+
+    for (edge *now_vertex = G->nodes[w].first; now_vertex != NULL; now_vertex = now_vertex->next)
+    {
+        if (now_vertex->w == v) return true;
+    }
+
+    return false;
 }
 
-int *Neighbors(graph, Vertex);
+int *Neighbors(graph G, Vertex v)
+{   
+    int *neighbors_edges = (int *)calloc(G->nV, sizeof(int));
 
-void insert_vertex(graph, Vertex);
+    assert(neighbors_edges != NULL);
+
+    for (int i = 0; i < G.nv; i++)
+    {
+        for (edge *now_vertex = G->nodes[i].first; now_vertex != NULL; now_vertex = now_vertex->next)
+        {   
+            if (i == v)
+            {
+                neighbors_edges[now_vertex->w] = 1;
+            }
+            else
+            {
+                if (now_vertex->w == v) neighbors_edges[now_vertex->w] = 1;
+            }
+            
+        }
+    }
+
+    return neighbors_edges;
+}
+
+void insert_vertex(graph, Vertex)
+{
+    
+}
+
 void delete_vertex(graph, Vertex);
 
 void insert_edge(graph, edge);
