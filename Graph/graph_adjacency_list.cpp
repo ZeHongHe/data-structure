@@ -39,9 +39,12 @@ void init_graph(graph G, Vertex V)
     G->nodes = (node *)malloc(V * sizeof(node));
     assert(G->nodes != NULL);
 
-    for (int i = 0, node *now_node = G->nodes[i]; i < G->nV; new_node = G->nodes[i])
+    int i = 0;
+    node *now_node = G->nodes[i];
+    while (i < G->nV)
     {
         G->nodes[i].v = i;
+        now_node = G->nodes[++i];
     }
 
     G->nV = V;
@@ -56,7 +59,7 @@ void init_graph(graph G, Vertex V)
 
 bool valid_vertex(graph G, Vertex v)
 {
-    assert(G != NULL && v > 0 && G->is_vertex_exist[v] == true);
+    return (G != NULL && v > 0 && G->is_vertex_exist[v] == true);
 }
 
 bool Adjacent(graph G, Vertex v, Vertex w)
@@ -81,7 +84,7 @@ int *Neighbors(graph G, Vertex v)
     int *neighbors_edges = (int *)calloc(G->nV, sizeof(int));
     assert(neighbors_edges != NULL);
 
-    for (int i = 0; i < G.nv; i++)
+    for (int i = 0; i < G->nV; i++)
     {
         for (edge *now_vertex = G->nodes[i].first; now_vertex != NULL; now_vertex = now_vertex->next)
         {   
@@ -125,7 +128,7 @@ void insert_vertex(graph G, Vertex v)
 
 void delete_vertex(graph G, Vertex v)
 {
-    assert(G != NULL && v >= 0 && v < G->nV);
+    assert(G != NULL && valid_vertex(G, v));
 
     for (edge *now_vertex = G->nodes[v].first; now_vertex != NULL;)
     {
@@ -163,18 +166,47 @@ void delete_edge(graph G, Vertex v, Vertex w)
     edge *temp = G->nodes[v].first;
     while (temp != NULL)
     {   
-        if (temp->next->w == w)
+        if (temp->w == w)
         {
-            edge *free_edge = temp;
+            edge *free_edge = temp->next;
+
+            int temp_value = free_edge->w;
+            free_edge->w = temp->w;
+            temp->w = temp_value;
+
             temp->next = free_edge->next;
+
+            free(free_edge);
         }
 
-        temp = temp->next; 
+        temp = temp->next;
     }
+
+    G->nE--;
 }
 
-int first_neighbor(graph, Vertex);
-int next_neighbor(graph, Vertex, Vertex);
+int first_neighbor(graph G, Vertex v) 
+{ 
+    assert(G != NULL && valid_vertex(G, v));
+
+    if (G->nodes[v].first != NULL) return (G->nodes[v].first->w);
+
+    return -1;
+}
+
+int next_neighbor(graph G, Vertex v, Vertex w)
+{
+    assert(G != NULL && valid_vertex(G, v));
+
+    edge *temp = G->nodes[v].first;
+    while (temp != NULL)
+    {
+        if (temp->w = w && temp->next != NULL) return temp->next->w;
+        temp = temp->next;
+    }
+
+    return -1;
+}
 
 int main() 
 {
