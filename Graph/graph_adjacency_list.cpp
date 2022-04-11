@@ -40,7 +40,7 @@ void init_graph(graph G, Vertex V)
     assert(G->nodes != NULL);
 
     int i = 0;
-    node *now_node = G->nodes[i];
+    node now_node = G->nodes[i];
     while (i < G->nV)
     {
         G->nodes[i].v = i;
@@ -201,7 +201,7 @@ int next_neighbor(graph G, Vertex v, Vertex w)
     edge *temp = G->nodes[v].first;
     while (temp != NULL)
     {
-        if (temp->w = w && temp->next != NULL) return temp->next->w;
+        if (temp->w == w && temp->next != NULL) return temp->next->w;
         temp = temp->next;
     }
 
