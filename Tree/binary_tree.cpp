@@ -1,6 +1,8 @@
 /* Binary tree implement using link list*/
 
 #include <iostream>
+#include <vector>
+#include <stack>
 #include <cassert>
 #define NDEBUG
 
@@ -54,41 +56,112 @@ bool insert_node(node *T, ElemType e) {
 
 void visit(node *T) { }
 
-void inorder(tree T)
+void inorder_traversal(tree T)
 {
     if (T != NULL)
     {
-        inorder(T->left);
+        inorder_traversal(T->left);
         visit(T);
-        inorder(T->right);
+        inorder_traversal(T->right);
     }
 }
 
-void inorder_no_recursion(tree T) { }
+vector<int> inorder_traversal_no_recursion(tree T)
+{
+    vector<int> res;
+    stack<node *> s;
+    node *temp = T;
 
-void preorder(tree T)
+    while (temp != nullptr || !s.empty())
+    {
+        while (temp != nullptr)
+        {
+            s.push(temp);
+            temp = temp->left;
+        }
+
+        temp = s.top();
+        s.pop();
+        res.push_back(temp->data);
+
+        temp = temp->right;
+    }
+
+    return res;
+}
+
+void preorder_traversal(tree T)
 {
     if (T != NULL)
     {
         visit(T);
-        preorder(T->left);
-        preorder(T->right);
+        preorder_traversal(T->left);
+        preorder_traversal(T->right);
     }
 }
 
-void preorder_no_recursion(tree T) { }
+vector<int> preorder_traversal_no_recursion(tree T)
+{
+    vector<int> res;
 
-void postorder(tree T)
+    if (T == nullptr) return res;
+
+    stack<node *> s;
+
+    node *temp = T;
+    s.push(temp);
+
+    while (!s.empty())
+    {
+        temp = s.top();
+        s.pop();
+        res.push_back(temp->data);
+
+        if (temp->right != nullptr) s.push(temp->right); 
+
+        if (temp->left != nullptr) s.push(temp->left);
+    }
+    
+    return res;
+}
+
+vector<int> preorder_traversal_no_recursion2(tree T)
+{
+    vector<int> res;
+
+    if (T == nullptr) return res;
+
+    stack<node *> s;
+    node *temp = T;
+
+    while (temp != nullptr || !s.empty())
+    {
+        while (temp != nullptr)
+        {   
+            res.push_back(temp->data);
+            s.push(temp);
+            temp = temp->left;
+        }
+
+        temp = s.top();
+        s.pop();
+        temp = temp->right;
+    }
+
+    return res;
+}
+
+void postorder_traversal(tree T)
 {
     if (T != NULL)
     {
-        postorder(T->left);
-        postorder(T->right);
+        postorder_traversal(T->left);
+        postorder_traversal(T->right);
         visit(T);
     }
 }
 
-void postorder_no_recursion(tree T) { }
+void postorder_traversal_no_recursion(tree T) { }
 
 void LevelOrder(tree T) { }
 
