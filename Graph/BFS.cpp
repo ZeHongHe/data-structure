@@ -1,35 +1,23 @@
 // BFS
 // Adjacency Matrix Representation
 
-#include "queue.h"
+#include "graph.h"
+// #include "queue.h"
 #include <iostream>
-
-#define MaxVertexNum 100
-#define VextexType char
-#define EdgeType int
+#include <cassert>
+#define NDEBUG
 
 using namespace std;
 
-struct Graph 
-{
-    VextexType Vex[MaxVertexNum];
-    EdgeType Edge[MaxVertexNum][MaxVertexNum];
-    int vexNum, edgeNum;
-};
+struct Graph { };
 
-typedef struct Graph graph;
+bool *visited;
 
-bool visited[MaxVertexNum];
+void bfs_traverse(Graph G) { }
 
-void bfs_traverse(Graph G)
-{
-    for (int i = 0; i < G.vexNum; ++i)
-        visited[i] = false;
-    
-}
+void bfs(Graph G, int v) { }
 
 int main()
 {
-
     cin.get();
 }
