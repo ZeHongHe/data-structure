@@ -2,20 +2,19 @@
 #define ElemType int
 using namespace std;
 
-// 二叉搜索树
-struct BSTNode 
+struct node 
 {
     int data;
-    struct BSTNode *left, *right;
+    struct node *left, *right;
 };
 
-typedef struct BSTNode BSTNode;
-typedef struct BSTNode *BSTree;
+typedef struct node node;
+typedef struct node *tree;
 
 // 创建并返回节点
-BSTNode *CreateNode(ElemType data) 
+node *create_node(ElemType data) 
 {
-    BSTNode *ptr = (BSTNode *)malloc(sizeof(BSTNode));
+    node *ptr = (node *)malloc(sizeof(node));
     ptr->data = data;
     ptr->left = NULL;
     ptr->right = NULL;
@@ -23,16 +22,16 @@ BSTNode *CreateNode(ElemType data)
 }
 
 // 初始化
-void InitTree(BSTree T) 
+void init_tree(tree T) 
 {
-    T = (BSTNode *)malloc(sizeof(BSTNode));
+    T = (node *)malloc(sizeof(node));
     T->data = 0;
     T->left = NULL;
     T->right = NULL;
 }
 
 // 查找
-BSTNode *SearchKey(BSTree T, ElemType key) 
+node *search(tree T, ElemType key) 
 {
     while (T != NULL && key != T->data) {
         if (key < T->data) T = T->left;
@@ -42,20 +41,20 @@ BSTNode *SearchKey(BSTree T, ElemType key)
 }
 
 // 递归实现查找
-BSTNode *SearchKeyWithRecursion(BSTree T, ElemType key) 
+node *search_recursion(tree T, ElemType key) 
 {
     if (T == NULL)
         return NULL;
     if (key == T->data)
         return T;
     else if (key < T->data)
-        return SearchKeyWithRecursion(T->left, key);
+        return search_recursion(T->left, key);
     else
-        return SearchKeyWithRecursion(T->right, key);
+        return search_recursion(T->right, key);
 }
 
 // 按排序插入节点
-bool InsertKey(BSTree T, ElemType key) 
+bool insert(tree T, ElemType key) 
 {
     while (T != NULL && key != T->data) 
     {
@@ -67,43 +66,39 @@ bool InsertKey(BSTree T, ElemType key)
             return false;
     }
 
-    T = CreateNode(key);
+    T = create_node(key);
 
     return true;
 }
 
 // 递归实现按排序插入节点
-bool InsertKeyWithRecursion(BSTree T, ElemType key) 
+bool insert_recursion(tree T, ElemType key) 
 {
     if (T == NULL) 
     {
-        T = CreateNode(key);
+        T = create_node(key);
         return true;
     }
     else if (key == T->data)
         return false;
 
     else if (key < T->data)
-        return InsertKeyWithRecursion(T->left, key);
+        return insert_recursion(T->left, key);
 
     else if (key > T->data)
-        return InsertKeyWithRecursion(T->right, key);
+        return insert_recursion(T->right, key);
 }
 
 // 构造二叉排序树
-void CreateBST(BSTree &T, int str[], int n)
+void create_bst(tree &T, int str[], int n)
 {
     T = NULL;
-    for (int i = 0; i < n; i++) InsertKey(T, str[i]);
+    for (int i = 0; i < n; i++) insert(T, str[i]);
 }
 
 
 int main() 
 {
-    BSTree T;
-    int str[8] = {50, 66, 60, 26, 21, 30, 70, 68};
-    CreateBST(T, str, 8);
-    SearchKey(T, 26);
 
     cin.get();
 }
