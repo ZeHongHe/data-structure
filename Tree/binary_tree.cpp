@@ -1,9 +1,10 @@
 /* Binary tree implement using link list*/
 
 #include <iostream>
+#include <cassert>
 #include <vector>
 #include <stack>
-#include <cassert>
+#include <queue>
 #define NDEBUG
 
 #define ElemType int
@@ -161,9 +162,40 @@ void postorder_traversal(tree T)
     }
 }
 
-void postorder_traversal_no_recursion(tree T) { }
+vector<int> postorder_traversal_no_recursion(tree T)
+{
+    vector<int> res;
+    return res;
+}
 
-void LevelOrder(tree T) { }
+vector<vector<int>> LevelOrder(tree T)
+{
+    vector<vector<int>> res;
+    if (T == nullptr) return res;
+
+    queue<node *> q;
+    node *temp = T;
+    q.push(temp);
+
+    while(!q.empty())
+    {
+        int size = q.size();
+        vector<int> row;
+        for (int i = 0; i < size; i++)
+        {
+            temp = q.back();
+            q.pop();
+            row.push_back(temp);
+
+            if (temp->left != nullptr) q.push(temp->left);
+            if (temp->right != nullptr) q.push(temp->right);
+        }
+
+        res.push_back(row);
+    }
+
+    return res;
+}
 
 int main()
 {
