@@ -91,6 +91,8 @@ vector<int> inorder_traversal_no_recursion(tree T)
     return res;
 }
 
+void inorder_traversal_no_recursion2(tree T) { }
+
 void preorder_traversal(tree T)
 {
     if (T != NULL)
@@ -102,31 +104,6 @@ void preorder_traversal(tree T)
 }
 
 vector<int> preorder_traversal_no_recursion(tree T)
-{
-    vector<int> res;
-
-    if (T == nullptr) return res;
-
-    stack<node *> s;
-
-    node *temp = T;
-    s.push(temp);
-
-    while (!s.empty())
-    {
-        temp = s.top();
-        s.pop();
-        res.push_back(temp->data);
-
-        if (temp->right != nullptr) s.push(temp->right); 
-
-        if (temp->left != nullptr) s.push(temp->left);
-    }
-    
-    return res;
-}
-
-vector<int> preorder_traversal_no_recursion2(tree T)
 {
     vector<int> res;
 
@@ -149,6 +126,31 @@ vector<int> preorder_traversal_no_recursion2(tree T)
         temp = temp->right;
     }
 
+    return res;
+}
+
+vector<int> preorder_traversal_no_recursion2(tree T)
+{
+    vector<int> res;
+
+    if (T == nullptr) return res;
+
+    stack<node *> s;
+
+    node *temp = T;
+    s.push(temp);
+
+    while (!s.empty())
+    {
+        temp = s.top();
+        s.pop();
+        res.push_back(temp->data);
+
+        if (temp->right != nullptr) s.push(temp->right); 
+
+        if (temp->left != nullptr) s.push(temp->left);
+    }
+    
     return res;
 }
 
@@ -196,6 +198,8 @@ vector<int> postorder_traversal_no_recursion(tree T)
     }
     return res;
 }
+
+void postorder_traversal_no_recursion2(tree T) { }
 
 vector<vector<int>> LevelOrder(tree T)
 {
