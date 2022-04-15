@@ -11,7 +11,6 @@ struct node
 typedef struct node node;
 typedef struct node *tree;
 
-// 创建并返回节点
 node *create_node(ElemType data) 
 {
     node *ptr = (node *)malloc(sizeof(node));
@@ -21,7 +20,6 @@ node *create_node(ElemType data)
     return ptr;
 }
 
-// 初始化
 void init_tree(tree T) 
 {
     T = (node *)malloc(sizeof(node));
@@ -30,7 +28,6 @@ void init_tree(tree T)
     T->right = NULL;
 }
 
-// 查找
 node *search(tree T, ElemType key) 
 {
     while (T != NULL && key != T->data) {
@@ -40,7 +37,6 @@ node *search(tree T, ElemType key)
     return T;
 }
 
-// 递归实现查找
 node *search_recursion(tree T, ElemType key) 
 {
     if (T == NULL)
@@ -53,7 +49,6 @@ node *search_recursion(tree T, ElemType key)
         return search_recursion(T->right, key);
 }
 
-// 按排序插入节点
 bool insert(tree T, ElemType key) 
 {
     while (T != NULL && key != T->data) 
@@ -71,7 +66,6 @@ bool insert(tree T, ElemType key)
     return true;
 }
 
-// 递归实现按排序插入节点
 bool insert_recursion(tree T, ElemType key) 
 {
     if (T == NULL) 
@@ -88,14 +82,6 @@ bool insert_recursion(tree T, ElemType key)
     else if (key > T->data)
         return insert_recursion(T->right, key);
 }
-
-// 构造二叉排序树
-void create_bst(tree &T, int str[], int n)
-{
-    T = NULL;
-    for (int i = 0; i < n; i++) insert(T, str[i]);
-}
-
 
 int main() 
 {
