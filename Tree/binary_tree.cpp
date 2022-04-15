@@ -55,7 +55,10 @@ bool insert_node(node *T, ElemType e) {
     }
 }
 
-void visit(node *T) { }
+void visit(node *T)
+{
+    printf("%d", T->data);
+}
 
 void inorder_traversal(tree T)
 {
