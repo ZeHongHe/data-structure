@@ -165,6 +165,35 @@ void postorder_traversal(tree T)
 vector<int> postorder_traversal_no_recursion(tree T)
 {
     vector<int> res;
+    if (T == nullptr) return res;
+
+    stack<node *> s;
+    node *temp = T;
+    node *pre = nullptr;
+
+    while (temp != nullptr || !s.empty())
+    {
+        while (temp != nullptr)
+        {
+            s.push(temp);
+            temp = temp->left;
+        }
+
+        temp = s.top();
+        s.pop();
+
+        if (temp->right == nullptr || temp->right == pre)
+        {
+            res.push_back(temp->data);
+            pre = temp;
+            temp = nullptr;
+        }
+        else
+        {
+            s.push(temp);
+            temp = temp->right;
+        }
+    }
     return res;
 }
 
@@ -185,7 +214,7 @@ vector<vector<int>> LevelOrder(tree T)
         {
             temp = q.back();
             q.pop();
-            row.push_back(temp);
+            row.push_back(temp->data);
 
             if (temp->left != nullptr) q.push(temp->left);
             if (temp->right != nullptr) q.push(temp->right);
