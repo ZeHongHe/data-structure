@@ -82,7 +82,11 @@ void bfs_traverse(graph G)
 
     for (int i = 0; i < G->nV; i++)
     {
-        if (!visited[i]) bfs(G, i, Q, visited);
+        if (!visited[i])
+        {
+            /* bfs for " i " vertex */
+            bfs(G, i, Q, visited);
+        }
     }
 }
 
