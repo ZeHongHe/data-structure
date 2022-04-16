@@ -1,8 +1,11 @@
 /* queue ADT implementation */
+
 #include <iostream>
+#include <cassert>
+
 using namespace std;
 
-struct node 
+struct node
 {
     int data;
     struct node *next;
@@ -20,6 +23,7 @@ typedef struct Queue *queue;
 void init_queue(queue Q)
 {
     Q = (queue)malloc(sizeof(Queue));
+    assert(Q != NULL);
 
     Q->head = NULL;
     Q->tail = NULL;
@@ -30,6 +34,7 @@ bool isEmpty(queue Q) { return (Q->head == NULL);}
 void en_queue(queue Q, int e)
 {
     node *new_node = (node *)malloc(sizeof(node));
+    assert(new_node != NULL);
 
     new_node->data = e;
     new_node->next = NULL;
@@ -51,6 +56,7 @@ void de_queue(queue Q, int &e)
     if (isEmpty(Q)) printf("Queue is empty!");
 
     node *delete_node = Q->head;
+
     e = delete_node->data;
 
     if (Q->tail == delete_node)

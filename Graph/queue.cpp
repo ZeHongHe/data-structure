@@ -3,10 +3,10 @@
 #include <cassert>
 using namespace std;
 
-struct node 
+struct Node 
 {
     int data;
-    struct node *next;
+    struct Node *next;
 };
 
 struct Queue
@@ -22,12 +22,11 @@ void init_queue(queue Q)
     Q->head->next = NULL;
 }
 
-bool is_empty(queue Q) { return (Q->head == Q->tail); }
+bool isEmpty(queue Q) { return (Q->head == Q->tail); }
 
 void en_queue(queue Q, int e)
 {
     node *new_node = (node *)malloc(sizeof(node));
-
     assert(new_node == NULL);
 
     new_node->data = e;
@@ -39,7 +38,7 @@ void en_queue(queue Q, int e)
 
 void de_queue(queue Q, int &e)
 {   
-    if (Q->head == Q->tail) printf("Queue is empty!");
+    assert(!isEmpty(Q));
 
     node *delete_node = Q->head->next;
 

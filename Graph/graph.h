@@ -1,4 +1,5 @@
 // Graph interface
+
 #include <cstdbool>
 #define Vertex int
 

@@ -35,7 +35,6 @@ void init_graph(graph G, int V)
     G->edges = (int **)malloc(V * sizeof(int *));
     assert(G->edges != NULL);
 
-    int i;
     for (int i = 0; i < G->nV; i++)
     {
         G->edges[i] = (int *)calloc(V, sizeof(int));
@@ -49,7 +48,7 @@ void init_graph(graph G, int V)
     }
 }
 
-bool valid_vertex(graph G, Vertex v) { return (G != NULL && v > 0 && G->is_vertex_exist[v] == true;); }
+bool valid_vertex(graph G, Vertex v) { return (G != NULL && v > 0 && G->is_vertex_exist[v] == true); }
 
 bool Adjacent(graph G, Vertex v, Vertex w)
 {
@@ -108,6 +107,7 @@ void insert_edge(graph G, edge e)
         G->nE++;
     }
 }
+
 void delete_edge(graph G, edge e)
 {
     assert(G != NULL && valid_vertex(G, e.v) && valid_vertex(G, e.w));
