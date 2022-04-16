@@ -1,4 +1,4 @@
-/* Adjacency Matrix Representation */
+/* Graph Using Adjacency Matrix */
 
 #include "graph.h"
 #include "queue.h"
@@ -67,6 +67,7 @@ void bfs(graph G, int v, queue Q, bool *visited)
     }
 }
 
+/* bfs for all nodes of the graph */
 void bfs_traverse(graph G)
 {
     /* Marks vertices that have been visited */
@@ -95,7 +96,7 @@ int main()
     cin.get();
 }
 
-/* graph */
+/* graph api */
 void init_graph(graph G, Vertex V)
 {
     assert(V > 0);
@@ -154,7 +155,7 @@ int next_neighbor(graph G, Vertex v, Vertex w)
     return -1;
 }
 
-/* queue */
+/* queue api */
 void init_queue(queue Q)
 {
     Q = (queue)malloc(sizeof(queue));
