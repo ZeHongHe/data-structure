@@ -37,6 +37,20 @@ struct LNode
 };
 
 void find_indegree(graph G, int *indegree)
+{
+    indegree = (int *)calloc(G->nV, sizeof(int));
+    assert(indegree != NULL);
+
+    int i = 0;
+    for (node *temp = G->nodes[i].first; i < G->nV; i++)
+    {
+        while (temp != NULL)
+        {
+            temp = temp->next;
+            indegree[i]++;
+        }
+    }
+}
 
 int *topological_sort(graph G)
 {
