@@ -38,7 +38,7 @@ void init_graph(graph G, int V)
     for (int i = 0; i < G->nV; i++)
     {
         G->edges[i] = (int *)calloc(V, sizeof(int));
-        assert(G.edges[i] != NULL);
+        assert(G->edges[i] != NULL);
     }
 
     G->is_vertex_exist = (bool *)malloc(V * sizeof(bool));
