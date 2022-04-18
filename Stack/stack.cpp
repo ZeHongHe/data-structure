@@ -12,11 +12,11 @@ struct node
 typedef struct node node;
 typedef struct node *stack;
 
-void init_stack(stack &S) { S = NULL; }
+void init_stack(stack S) { S = NULL; }
 
 bool isEmpty(stack S) { return (S == NULL); }
 
-void destroy_stack(stack &S)
+void destroy_stack(stack S)
 {
     while(!isEmpty(S))
     {
@@ -28,7 +28,7 @@ void destroy_stack(stack &S)
     }
 }
 
-void push(stack &S, int e)
+void push(stack S, int e)
 {
     if (isEmpty(S))
     {
@@ -52,7 +52,7 @@ void push(stack &S, int e)
     }
 }
 
-void pop(stack &S, int e)
+void pop(stack S, int e)
 {
     if (isEmpty(S)) printf("stack is empty!");
 
