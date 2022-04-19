@@ -20,6 +20,12 @@ struct Edge
     int w;
 };
 
+/* Marks whether each node has been added to the minimum spanning tree */
+bool *is_join;
+
+/* minimum cost for each node to join in the tree */
+int *low_cost;
+
 int find_min_dist(graph G, bool *is_join, int *low_cost)
 {
     int min_vertex;
@@ -55,14 +61,12 @@ void update_low_cost(graph G, int v, bool *is_join, int *low_cost)
 void prim(graph G, int v)
 {
     /*----------------init-------------------*/
-    // is_join: marks whether each node has been added to the minimum spanning tree
-    bool *is_join = (bool *)calloc(G->nV, sizeof(bool));
+    is_join = (bool *)calloc(G->nV, sizeof(bool));
     assert(is_join != NULL);
 
     is_join[v] = true;
 
-    // low_cost: minimum cost for each node to join in the tree
-    int *low_cost = (int *)malloc(G->nV * sizeof(int));
+    low_cost = (int *)malloc(G->nV * sizeof(int));
     assert(low_cost != NULL);
 
     // Assume no edge on graph, the minimum cost to join is infinity.
@@ -70,7 +74,7 @@ void prim(graph G, int v)
     {
         if (G->edges[v][i])
         {
-            low_cost[i] = G->edges[v][w];
+            low_cost[i] = G->edges[v][i];
         }
         else
         {
@@ -84,7 +88,7 @@ void prim(graph G, int v)
     {
         int min_vertex = find_min_dist(G, is_join, low_cost);
 
-        is_joinp[min_vertex] = true;
+        is_join[min_vertex] = true;
 
         update_low_cost(G, min_vertex, is_join, low_cost);
 
