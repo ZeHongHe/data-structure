@@ -20,7 +20,7 @@ struct Edge
     int w;
 };
 
-int *dist;~
+int *dist;
 
 int *path;
 
