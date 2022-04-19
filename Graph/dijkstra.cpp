@@ -1,8 +1,7 @@
 #include <iostream>
 #include <climits>
-#include <cassert>
+
 #include "graph.h"
-#define NDEBUG
 
 using namespace std;
 
@@ -20,8 +19,10 @@ struct Edge
     int w;
 };
 
+/* Stores the minimum distances to vertex */
 int *dist;
 
+/* Stores the prev vertex of index vertex on the shortest path */
 int *path;
 
 int find_min_dist(graph G, bool *vset, int *dist)
@@ -53,11 +54,12 @@ void dijkstra(graph G, int v)
     {
         dist[i] = INT_MAX;
         vset[i] = false;
+        path[i] = -1;
     }
 
     dist[v] = 0;
 
-    for (int i = 0; i < G->nV; i++)
+    for (int i = 0; i < G->nV - 1; i++)
     {
         int w = find_min_dist(G, vset, dist);
 
@@ -69,6 +71,7 @@ void dijkstra(graph G, int v)
                 && dist[w] + G->edges[w][i] < dist[i])
             {
                 dist[i] = dist[w] + G->edges[w][i];
+                path[i] = w;
             }
         }
     }
