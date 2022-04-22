@@ -2,15 +2,18 @@
 #define ElemType int
 using namespace std;
 
-typedef struct ThreadNode {
+struct Node {
     ElemType data;
-    struct ThreadNode *left, *right;
+    struct Node *left, *right;
     int lTag, rTag;
-} ThreadNode, *ThreadTree;
+};
+
+typedef struct Node node, *thread_tree;
 
 // creates a new node and return its pointer
-ThreadNode *CreateNode(ElemType data) {
-    ThreadNode *ptr = (ThreadNode *)malloc(sizeof(ThreadNode));
+node *CreateNode(ElemType data)
+{
+    node *ptr = (node *)malloc(sizeof(node));
     ptr->data = data;
     ptr->left = NULL;
     ptr->right = NULL;
@@ -18,8 +21,9 @@ ThreadNode *CreateNode(ElemType data) {
 }
 
 // inits a threaded tree
-void InitTree(ThreadTree T) {
-    T = (ThreadNode *)malloc(sizeof(ThreadNode));
+void InitTree(thread_tree T)
+{
+    T = (node *)malloc(sizeof(node));
     T->data = 0;
     T->left = NULL;
     T->right = NULL;
@@ -28,8 +32,9 @@ void InitTree(ThreadTree T) {
 }
 
 // inserts node after T 
-bool InsertNode(ThreadNode *T, ElemType e) {
-    ThreadNode *newNode = CreateNode(e);
+bool InsertNode(node *T, ElemType e)
+{
+    node *newNode = CreateNode(e);
     if (T->left == NULL)
     {
         T->left = newNode;
@@ -46,23 +51,30 @@ bool InsertNode(ThreadNode *T, ElemType e) {
     }
 }
 
-ThreadNode *pre = NULL;
+node *pre = NULL;
 
-void Visit(ThreadNode *T) {
-    if (T->left == NULL) {    
+void Visit(node *T)
+{
+    if (T->left == NULL)
+    {    
             T->left = pre;
             T->lTag = 1;
     }
-    if (pre != NULL && pre->right == NULL) {   
+
+    if (pre != NULL && pre->right == NULL)
+    {   
         pre->right = T;
         pre->rTag = 1;
     }
+
     pre = T;
 }
 
 
-void InThread(ThreadTree T, ThreadNode *pre) {
-    if (T != NULL) {
+void InThread(thread_tree T, node *pre)
+{
+    if (T != NULL)
+    {
         InThread(T->left, pre);
         Visit(T);
         InThread(T->right, pre);
@@ -70,9 +82,11 @@ void InThread(ThreadTree T, ThreadNode *pre) {
 }
 
 
-void CreateInThread(ThreadTree T) {
-    ThreadNode *pre = NULL;
-    if (T != NULL) {
+void CreateInThread(thread_tree T)
+{
+    node *pre = NULL;
+    if (T != NULL)
+    {
         InThread(T, pre);
         pre->right = NULL;
         pre->rTag = 1;
@@ -80,8 +94,10 @@ void CreateInThread(ThreadTree T) {
 }
 
 
-void PreThread(ThreadTree T, ThreadNode *pre) {
-    if (T != NULL) {
+void PreThread(thread_tree T, node *pre)
+{
+    if (T != NULL)
+    {
         Visit(T);
         if (T->lTag == 0)
             PreThread(T->left, pre);
@@ -90,9 +106,11 @@ void PreThread(ThreadTree T, ThreadNode *pre) {
 }
 
 
-void CreatePreThread(ThreadTree T) {
-    ThreadNode *pre = NULL;
-    if (T != NULL) {
+void CreatePreThread(thread_tree T)
+{
+    node *pre = NULL;
+    if (T != NULL)
+    {
         PreThread(T, pre);
         pre->right = NULL;
         pre->rTag = 1;
@@ -100,8 +118,10 @@ void CreatePreThread(ThreadTree T) {
 }
 
 
-void PostThread(ThreadTree T, ThreadNode *pre) {
-    if (T != NULL) {
+void PostThread(thread_tree T, node *pre)
+{
+    if (T != NULL)
+    {
         PostThread(T->left, pre);
         PostThread(T->right, pre);
         Visit(T);
@@ -109,92 +129,103 @@ void PostThread(ThreadTree T, ThreadNode *pre) {
 }
 
 
-void CreatePostThread(ThreadTree T) {
-    ThreadNode *pre = NULL;
-    if (T != NULL) {
+void CreatePostThread(thread_tree T)
+{
+    node *pre = NULL;
+    if (T != NULL)
+    {
         PostThread(T, pre);
-        if (pre->right == NULL)
-            pre->rTag = 1;
+        if (pre->right == NULL) pre->rTag = 1;
     }
 }
 
 // 找到以 p 为根的子树中，第一个被中序遍历的节点
-ThreadNode *FirstNodeInOrder(ThreadNode *p) {
+node *FirstNodeInOrder(node *p)
+{
     while (p->lTag == 0)
         p = p->left;
     return p;
 }
 
 // 找到以 p 为根的子树中，最后一个被中序遍历的节点
-ThreadNode *LastNodeInOrder(ThreadNode *p) {
+node *LastNodeInOrder(node *p)
+{
     while (p->rTag == 0)
         p = p->right;
     return p;
 }
 
 // 找到 p 的中序后继节点
-ThreadNode *NextNodeInOrder(ThreadNode *p) {
+node *NextNodeInOrder(node *p)
+{
     if (p->rTag == 0) return FirstNode(p->right);
     else return p->right;
 }
 
 // 找到 p 的中序前驱节点
-ThreadNode *PreNodeInOrder(ThreadNode *p) { 
+node *PreNodeInOrder(node *p)
+{ 
     if (p->lTag == 0) return LastNode(p->left);
     else return p->left;
 }
 
 // 线索二叉树的中序遍历的非递归实现
-void InOrderNonRecursion(ThreadTree T) {
-    for(ThreadNode* p = FirstNode(T); p != NULL; p = NextNode(p))
+void InOrderNonRecursion(thread_tree T)
+{
+    for(node* p = FirstNode(T); p != NULL; p = NextNode(p))
         Visit(p);
 }
 
 // 线索二叉树的逆中序遍历的非递归实现
-void InReverseOrderNonRecursion(ThreadTree T) {
-    for(ThreadNode* p = LastNode(T); p != NULL; p = PreNode(p))
+void InReverseOrderNonRecursion(thread_tree T)
+{
+    for(node* p = LastNode(T); p != NULL; p = PreNode(p))
         Visit(p);
 }
 
 // 找到以 p 为根的子树中，第一个被先序遍历的节点
-ThreadNode *FirstNodePreOrder(ThreadNode *p) {
+node *FirstNodePreOrder(node *p)
+{
     return p;    // 原地 TP
 }
 
 // 找到以 p 为根的子树中，最后一个被先序遍历的节点
-ThreadNode *FirstNodePreOrder(ThreadNode *p) {
+node *FirstNodePreOrder(node *p)
+{
     if (p->left == NULL && p->right == NULL) return p;
     // 未完成
 }
 
 // 找到 p 的先序后继节点
-ThreadNode *NextNodePreOrder(ThreadNode *p) {
+node *NextNodePreOrder(node *p)
+{
     if (p->rTag == 1 || p->lTag == 1) return p->right;
     else return p->left;
 }
 
 // 找到 p 的先序前驱节点
-ThreadNode *PreNodePreOrder(ThreadNode *p) {
+node *PreNodePreOrder(node *p)
+{
     if (p->lTag == 1) return p->left;
     else return p;   // 若 lTag == 0，则无法找到 p 的先序前驱节点，除非是改用三叉链表找到父节点或从根节点开始遍历
 }
 
 // 找到 p 的后序后继节点
-ThreadNode *NextNodePostOrder(ThreadNode *p) {
+node *NextNodePostOrder(node *p)
+{
     if (p->rTag == 1) return p->right;
     else return p;   // 若 rTag == 0，则无法找到 p 的后序后续节点，除非是改用三叉链表找到父节点或从根节点开始遍历
 }
 
 // 找到 p 的后序前驱节点
-ThreadNode *PreNodePostOrder(ThreadNode *p) {
+node *PreNodePostOrder(node *p)
+{
     if (p->lTag == 1) return p->lTag;
     else if (p->rTag == 0 && p->right != NULL) return p->right;
     else return p->left;
 }
 
-int main() {
-    ThreadTree root;
-    InitTree(root);
-
+int main()
+{
     cin.get();
 }
