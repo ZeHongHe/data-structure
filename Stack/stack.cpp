@@ -46,7 +46,7 @@ void push(stack S, int e)
         if (new_node == NULL) printf("Out of space!");
 
         new_node->data = e;
-        new_node->next = NULL;
+        new_node->next = s->next;
 
         S->next = new_node;
     }

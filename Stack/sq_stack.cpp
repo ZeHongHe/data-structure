@@ -23,7 +23,7 @@ void init_stack(stack &S)
 
 bool isEmpty(stack S) { return (S.top == -1); }
 
-bool isFull(stack S) { return (S.top == MAXSIZE); }
+bool isFull(stack S) { return (S.top == MAXSIZE - 1); }
 
 void push(stack &S, int e)
 {
