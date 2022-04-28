@@ -3,37 +3,35 @@
 #define NDEBUG
 using namespace std;
 
-struct Node
+struct rb_node
 {
     int val;
-    struct Node *par;
-    struct Node *left;
-    struct Node *right;
+    struct rb_node *par;
+    struct rb_node *left;
+    struct rb_node *right;
 
     /* 1 -> red, 0 -> black */
     int color;
 };
 
-typedef struct Node node;
-
-node *create_node(int val, node *par)
+rb_node *create_node(int val, rb_node *par)
 {
-    node *new_node = (node *)malloc(sizeof(node));
+    rb_node *node = (rb_node *)malloc(sizeof(rb_node));
+    assert(node != NULL);
+    
+    node->val = val;
+    node->par = par;
+    node->left = NULL;
+    node->right = NULL;
+    node->color = 1;
 
-    assert(new_node != NULL);
-
-    new_node->val = val;
-    new_node->par = par;
-    new_node->left = NULL;
-    new_node->right = NULL;
-
-    new_node->color = 1;
+    return node;
 }
 
-node *right_rotate(node *y)
+rb_node *right_rotate(rb_node *y)
 {
-    node *x = y->left;
-    node *T2 = x->right;
+    rb_node *x = y->left;
+    rb_node *T2 = x->right;
 
     y->left = T2;
     x->right = y;
@@ -41,10 +39,10 @@ node *right_rotate(node *y)
     return x;
 }
 
-node *left_rotate(node *x)
+rb_node *left_rotate(rb_node *x)
 {
-    node *y = x->right;
-    node *T2 = y->left;
+    rb_node *y = x->right;
+    rb_node *T2 = y->left;
 
     x->right = T2;
     y->left = x;
@@ -52,13 +50,9 @@ node *left_rotate(node *x)
     return y;
 }
 
-node *left_right_rotate(node *z);
+rb_node *insert_node(rb_node *root, int key);
 
-node *right_left_rotate(node *z);
-
-node *insert_node(node *root, int key);
-
-node *delete_node(node *root, int querykey);
+rb_node *delete_node(rb_node *root, int querykey);
 
 int main()
 {
