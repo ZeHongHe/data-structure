@@ -28,26 +28,69 @@ rb_node *create_node(int val, rb_node *par)
     return node;
 }
 
-rb_node *right_rotate(rb_node *y)
+rb_node *right_rotate(rb_node *node, rb_node *root)
 {
-    rb_node *x = y->left;
-    rb_node *T2 = x->right;
+    struct rb_node *left = node->left;
 
-    y->left = T2;
-    x->right = y;
+    if ((node->left = left->right))
+    {
+        left->right->par = node;
+    }
 
-    return x;
+    left->right = node;
+
+    if ((left->par = node->par))
+    {
+        if (node == node->par->left)
+        {
+            node->par->left = left;
+        }
+        else
+        {
+            node->par->right = left;
+        }
+    }
+    else
+    {
+        root = left;
+    }
+
+    node->par = left;
+
+    return node;
 }
 
-rb_node *left_rotate(rb_node *x)
+rb_node *left_rotate(rb_node *node, rb_node *root)
 {
-    rb_node *y = x->right;
-    rb_node *T2 = y->left;
+    struct rb_node *right = node->right;
 
-    x->right = T2;
-    y->left = x;
+    if ((node->right = right->left))
+    {
+        right->left->par = node;
+    }
 
-    return y;
+    right->left = node;
+
+    if ((right->par = node->par))
+    {
+        if (node == node->par->left)
+        {
+            node->par->left = right;
+        }
+        else
+        {
+            node->par->right = right;
+        }
+    }
+    else
+    {
+        root = right;
+    }
+
+    node->par = right;
+
+    return node;
+    
 }
 
 rb_node *insert_node(rb_node *root, int key);
