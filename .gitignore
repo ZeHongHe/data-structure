@@ -37,4 +37,4 @@
 # shell scripts
 *.sh
 
-.gitignore
+*.gitignore
