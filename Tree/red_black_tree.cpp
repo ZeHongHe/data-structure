@@ -133,9 +133,10 @@ void check_color(rb_node *node)
                 parent->color = RB_BLACK;
                 grand_parent->color = RB_RED;
             }
+
+            /* right left case */
             else
             {
-                /* right left case */
                 right_rotate(grand_parent);
 
                 left_rotate(great_grand_parent);
@@ -144,9 +145,9 @@ void check_color(rb_node *node)
                 grand_parent = RB_RED;
             }
         }
+        /* left case */
         else
         {
-            /* left case */
             /* left left case */
             if (parent->right = node)
             {
@@ -155,9 +156,10 @@ void check_color(rb_node *node)
                 parent->color = RB_BLACK;
                 grand_parent->color = RB_RED;
             }
+
+            /* left right case */
             else
             {
-                /* left right case */
                 left_rotate(grand_parent);
 
                 right_rotate(great_grand_parent);
