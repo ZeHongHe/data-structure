@@ -1,5 +1,9 @@
 #include <iostream>
+#include <cassert>
+
+#define NDEBUG
 #define ElemType int
+
 using namespace std;
 
 struct AVLNode
@@ -15,16 +19,12 @@ typedef struct AVLNode *avlTree;
 avlNode *create_node(int key)
 {
     avlNode *node = (avlNode *)malloc(sizeof(avlNode));
+    assert(node != NULL);
 
-    if (node == NULL)
-        printf("Out of memory!");
-    else 
-    {
-        node->key = key;
-        node->left = NULL;
-        node->right = NULL;
-        node->height = 0;
-    }
+    node->key = key;
+    node->left = NULL;
+    node->right = NULL;
+    node->height = 0;
 
     return node;
 }

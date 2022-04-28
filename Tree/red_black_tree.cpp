@@ -10,7 +10,7 @@ struct Node
     struct Node *left;
     struct Node *right;
 
-    /* if color equals 1 means red. */
+    /* 1 -> red, 0 -> black */
     int color;
 };
 
@@ -30,9 +30,27 @@ node *create_node(int val, node *par)
     new_node->color = 1;
 }
 
-node *right_rotate(node *y);
+node *right_rotate(node *y)
+{
+    node *x = y->left;
+    node *T2 = x->right;
 
-node *left_rotate(node *x);
+    y->left = T2;
+    x->right = y;
+
+    return x;
+}
+
+node *left_rotate(node *x)
+{
+    node *y = x->right;
+    node *T2 = y->left;
+
+    x->right = T2;
+    y->left = x;
+
+    return y;
+}
 
 node *left_right_rotate(node *z);
 
