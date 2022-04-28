@@ -1,6 +1,8 @@
 #include <iostream>
-#include <cassert>
-#define NDEBUG
+
+#define RB_RED   1
+#define RB_BLACK 0
+
 using namespace std;
 
 struct rb_node
@@ -9,21 +11,18 @@ struct rb_node
     struct rb_node *par;
     struct rb_node *left;
     struct rb_node *right;
-
-    /* 1 -> red, 0 -> black */
     int color;
 };
 
 rb_node *create_node(int val, rb_node *par)
 {
     rb_node *node = (rb_node *)malloc(sizeof(rb_node));
-    assert(node != NULL);
     
     node->val = val;
     node->par = par;
     node->left = NULL;
     node->right = NULL;
-    node->color = 1;
+    node->color = RB_RED;
 
     return node;
 }
@@ -93,7 +92,44 @@ rb_node *left_rotate(rb_node *node, rb_node *root)
     
 }
 
-rb_node *insert_node(rb_node *root, int key);
+rb_node *insert_node(int val, rb_node *root)
+{
+    rb_node *buffer = root;
+
+    while (buffer)
+    {
+        if (val < buffer->val)
+        {
+            if (buffer->left)
+            {
+                buffer = buffer->left;
+            }
+            else
+            {
+                rb_node *temp = create_node(val, buffer);
+                buffer->left = temp;
+                buffer = temp;
+
+                break;
+            }
+        }
+        else
+        {
+            if (buffer->right)
+            {
+                buffer = buffer->right;
+            }
+            else
+            {
+                rb_node *temp = create_node(val, buffer);
+                buffer->right = temp;
+                buffer = temp;
+
+                break;
+            }
+        }
+    }
+}
 
 rb_node *delete_node(rb_node *root, int querykey);
 
