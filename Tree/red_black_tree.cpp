@@ -231,6 +231,8 @@ void insert_node(int val, rb_node *root)
     }
 }
 
+void check_color_delete(rb_node *node);
+
 rb_node *delete_node(rb_node *root, int querykey);
 
 int main()
