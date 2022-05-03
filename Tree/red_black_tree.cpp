@@ -169,8 +169,6 @@ void check_color(rb_node *node)
             }
         }
     }
-
-
 }
 
 void insert_node(int val, rb_node *root)
