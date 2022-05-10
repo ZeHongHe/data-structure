@@ -76,9 +76,9 @@ vector<int> inorder_traversal_no_recursion(tree T)
     stack<node *> s;
     node *temp = T;
 
-    while (temp != nullptr || !s.empty())
+    while (temp || !s.empty())
     {
-        while (temp != nullptr)
+        while (temp)
         {
             s.push(temp);
             temp = temp->left;
