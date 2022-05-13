@@ -1,6 +1,7 @@
 /* Binary tree implement using link list*/
 
 #include <iostream>
+#include <algorithm>
 #include <cassert>
 #include <vector>
 #include <stack>
@@ -167,42 +168,30 @@ void postorder_traversal(tree T)
     }
 }
 
-vector<int> postorder_traversal_no_recursion(tree T)
+vector<int> postorder_traversal_no_recursion(tree T);
+
+vector<int> postorder_traversal_no_recursion2(tree T)
 {
     vector<int> res;
-    if (T == nullptr) return res;
+    if (!T) return res;
 
     stack<node *> s;
-    node *temp = T;
-    node *pre = nullptr;
+    s.push(T);
 
-    while (temp != nullptr || !s.empty())
+    while (!s.empty())
     {
-        while (temp != nullptr)
-        {
-            s.push(temp);
-            temp = temp->left;
-        }
-
-        temp = s.top();
+        node* temp = s.top();
         s.pop();
+        res.push_back(temp->data);
 
-        if (temp->right == nullptr || temp->right == pre)
-        {
-            res.push_back(temp->data);
-            pre = temp;
-            temp = nullptr;
-        }
-        else
-        {
-            s.push(temp);
-            temp = temp->right;
-        }
+        if (temp->left) s.push(temp->left);
+        if (temp->right) s.push(temp->right);
     }
+
+    reverse(res.begin(), res.end());
+
     return res;
 }
-
-void postorder_traversal_no_recursion2(tree T) { }
 
 vector<vector<int>> LevelOrder(tree T)
 {
