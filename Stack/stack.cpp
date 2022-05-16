@@ -1,6 +1,9 @@
 /* stack implementation using linklist */
 
 #include <iostream>
+#include <cassert>
+#define NDEBUG
+
 using namespace std;
 
 struct node
@@ -33,8 +36,7 @@ void push(stack S, int e)
     if (isEmpty(S))
     {
         S = (node *)malloc(sizeof(node));
-
-        if (S == NULL) printf("Out of space!");
+        assert(S != NULL);
 
         S->data = e;
         S->next = NULL;
@@ -42,11 +44,10 @@ void push(stack S, int e)
     else
     {
         node *new_node = (node *)malloc(sizeof(node));
-
-        if (new_node == NULL) printf("Out of space!");
+        assert(new_node != NULL);
 
         new_node->data = e;
-        new_node->next = s->next;
+        new_node->next = S->next;
 
         S->next = new_node;
     }
@@ -54,14 +55,15 @@ void push(stack S, int e)
 
 void pop(stack S, int e)
 {
-    if (isEmpty(S)) printf("stack is empty!");
+    if (!isEmpty(S))
+    {
+        node *delete_node = S->next;
 
-    node *delete_node = S->next;
+        e = delete_node->data;
+        S->next = delete_node->next;
 
-    e = delete_node->data;
-    S->next = delete_node->next;
-
-    free(delete_node);
+        free(delete_node);
+    }
 }
 
 int main()

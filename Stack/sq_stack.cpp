@@ -1,7 +1,11 @@
 /* stack implementation using array */
 
 #include <iostream>
+#include <cassert>
+
+#define NDEBUG
 #define MAXSIZE 10
+
 using namespace std;
 
 struct Stack
@@ -16,7 +20,7 @@ void init_stack(stack &S)
 {
     S.data = (int *)malloc(MAXSIZE * sizeof(int));
 
-    if (S == NULL) printf("Out of space!");
+    assert(S.data != NULL);
 
     S.top = -1;
 }
@@ -27,16 +31,18 @@ bool isFull(stack S) { return (S.top == MAXSIZE - 1); }
 
 void push(stack &S, int e)
 {
-    if (isFull(S)) printf("Stack is full!");
-
-    S.data[++S.top] = e;
+    if (!isFull(S))
+    {
+        S.data[++S.top] = e;
+    }
 }
 
 void pop(stack &S, int &e)
 {
-    if (isEmpty(S)) printf("Stack is empty!");
-
-    e = S.data[S.top--];
+    if (!isEmpty(S))
+    {
+        e = S.data[S.top--];
+    }
 }
 
 int main()
