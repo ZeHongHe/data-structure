@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cassert>
+#define NDEBUG
 
 #define MAXSIZE 10
 
