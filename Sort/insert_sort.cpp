@@ -2,7 +2,11 @@
 
 using namespace std;
 
-
+/**
+ * Insertion sort
+ * @param arr array to be sorted
+ * @param n size of array
+ */
 void insert_sort(int *arr, int n)
 {
     for (int i = 1; i < n; i++)
