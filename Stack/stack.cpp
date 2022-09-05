@@ -47,9 +47,8 @@ void push(stack S, int e)
         assert(new_node != NULL);
 
         new_node->data = e;
-        new_node->next = S->next;
-
-        S->next = new_node;
+        new_node->next = S;
+        S = new_node;
     }
 }
 
