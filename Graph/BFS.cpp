@@ -96,7 +96,7 @@ int main()
     cin.get();
 }
 
-/* graph api */
+/*----------------graph api-------------------*/
 void init_graph(graph G, Vertex V)
 {
     assert(V > 0);

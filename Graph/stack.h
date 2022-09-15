@@ -11,4 +11,4 @@ void init_stack(stack);
 bool isEmpty(stack);
 void destroy_stack(stack);
 void push(stack, int);
-void pop(stack, &int)
+void pop(stack, &int);
