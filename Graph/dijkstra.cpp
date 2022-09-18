@@ -57,6 +57,7 @@ void dijkstra(graph G, int v)
         path[i] = -1;
     }
 
+    /* first 'find_min_dist' will return 'v', then update all the adjacent distances. */
     dist[v] = 0;
 
     for (int i = 0; i < G->nV - 1; i++)
