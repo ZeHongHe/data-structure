@@ -49,7 +49,7 @@ void de_queue(queue Q, int &e)
     node *delete_node = Q->head->next;
 
     e = delete_node->data;
-    Q->head = delete_node->next;
+    Q->head->next = delete_node->next;
 
     if (Q->tail == delete_node) Q->tail = Q->head;
 
