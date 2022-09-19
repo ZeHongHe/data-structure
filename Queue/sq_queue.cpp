@@ -1,6 +1,8 @@
 /* circular queue implementation using array */
 
 #include <iostream>
+#include <cassert>
+
 #define MAXSIZE 10
 using namespace std;
 
@@ -17,7 +19,7 @@ void init_queue(queue &Q)
 {
     Q.data = (int *)malloc(MAXSIZE * sizeof(int));
 
-    if (Q.data == NULL) printf("Out of space!");
+    assert(Q.data != NULL);
 
     Q.head = Q.tail = 0; 
 }
@@ -30,7 +32,7 @@ int size(queue Q) { return ((Q.tail + MAXSIZE - Q.head) % MAXSIZE); }
 
 void en_queue(queue &Q, int e)
 {   
-    if (isFull(Q)) printf("Queue is full!");
+    assert(!isFull(Q));
 
     Q.data[Q.tail] = e;
     Q.tail = (Q.head + 1) % MAXSIZE;
@@ -38,7 +40,7 @@ void en_queue(queue &Q, int e)
 
 void de_queue(queue &Q, int &e)
 {
-    if (isEmpty(Q)) printf("Queue is empty!");
+    assert(!isEmpty(Q));
 
     e = Q.data[Q.head];
     Q.head = (Q.head + 1) % MAXSIZE;
