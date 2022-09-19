@@ -56,10 +56,11 @@ void pop(stack S, int e)
 {
     if (!isEmpty(S))
     {
-        node *delete_node = S->next;
+        node *delete_node = S;
 
         e = delete_node->data;
-        S->next = delete_node->next;
+        
+        S = delete_node->next;
 
         free(delete_node);
     }
