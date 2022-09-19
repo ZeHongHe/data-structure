@@ -24,6 +24,7 @@ void init_queue(queue &Q)
     Q.head = Q.tail = 0; 
 }
 
+// judging "isFull" also can using "return (Q.rear + MaxSize - Q.front) % MaxSize" 
 bool isFull(queue Q) { return ((Q.tail + 1) % MAXSIZE == Q.head); }
 
 bool isEmpty(queue Q) { return (Q.head == Q.tail); }
