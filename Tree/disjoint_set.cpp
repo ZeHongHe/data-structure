@@ -47,6 +47,19 @@ void union_by_size(DjSet &S, int x, int y)
 {
     int x_root = find(S, x);
     int y_root = find(S, y);
+
+    if(x_root == y_root) return;	
+    	
+  	if(S->set[y_root] > S->set[x_root])
+    {	
+      	S->set[x_root] += S->set[y_root];
+      	S->set[y_root] = x_root;
+    }
+    else
+    {
+	    S->set[y_root] += S->set[x_root];
+      	S->set[x_root] = y_root;
+    }	
 }
 
 /* find with path splitting ver. */
