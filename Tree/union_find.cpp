@@ -30,11 +30,7 @@ union_find::union_find(int n)
     }
 }
 
-union_find::~union_find()
-{
-    free(parent);
-    free(size);
-}
+union_find::~union_find() { }
 
 bool union_find::validate(int p)
 {
