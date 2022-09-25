@@ -21,7 +21,7 @@ void quick_sort(int *arr, int lower, int upper)
     if (lower < upper)
     {
         int partition_index = partition(arr, lower, upper);
-        quick_sort(arr, lower, partition_index);
+        quick_sort(arr, lower, partition_index - 1);
         quick_sort(arr, partition_index + 1, upper);
     }
 }
